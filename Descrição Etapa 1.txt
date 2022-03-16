@@ -1,0 +1,5 @@
+Nossa aplicação é um blog, com funcionalidade para Cadastros de Usuário com níveis Padrão e Escritor.
+Cadastros de Categoria para os Posts.
+O Escritor pode escrever, curtir, favoritar e comentar em Posts, já o Padrão apenas visualizar curtir, favoritar e comentar.
+Um Post pode haver infinitos comentários, e apenas um like e um favorito por usuário.
+Um Post sempre possui uma categoria. 
