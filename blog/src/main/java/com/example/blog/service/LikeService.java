@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface LikeService {
-    Optional<Like> getFavoritosById(Integer id);
-    List<Like> getAllFavoritos();
-    void deleteFavoritosById(Integer id);
-    void insertFavoritos(Like Like);
+    Optional<Like> getLikeById(Integer id);
+    List<Like> getAllLike();
+    void deleteLikeById(Integer id);
+    void insertlike(Like Like);
 }
