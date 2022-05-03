@@ -1,17 +1,17 @@
 package com.example.blog.service;
 
 
-import com.example.blog.model.Comentario;
 import com.example.blog.model.Favoritos;
-import com.example.blog.repository.ComentarioRepository;
 import com.example.blog.repository.FavoritosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service("FavoritosService")
-public class FavoritosServiceImpl {
+public class FavoritosServiceImpl implements FavoritosService{
+
     @Autowired
     FavoritosRepository favoritosRepository;
 
@@ -19,12 +19,15 @@ public class FavoritosServiceImpl {
     public Optional<Favoritos> getFavoritosById(Integer id){ return favoritosRepository.findById(id);}
 
     @Override
+    public List<Favoritos> getAllFavoritos() {return favoritosRepository.findAll();}
+
+    @Override
     public void deleteAllFavoritos() {
         favoritosRepository.deleteAll();
     }
 
     @Override
-    public void deleteAllFavoritosById(Integer id) {
+    public void deleteFavoritosById(Integer id) {
         favoritosRepository.deleteById(id);
     }
 

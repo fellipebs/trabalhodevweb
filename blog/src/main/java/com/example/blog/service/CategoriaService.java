@@ -5,7 +5,7 @@ import com.example.blog.model.Categoria;
 import java.util.List;
 import java.util.Optional;
 
-public interface CategoriaService {
+public interface CategoriaService{
     Optional<Categoria> getCategoriaById(Integer id);
     List<Categoria> getAllCategoria();
     void deleteAllCategoria();

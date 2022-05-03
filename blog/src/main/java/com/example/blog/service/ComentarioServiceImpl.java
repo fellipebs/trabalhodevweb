@@ -1,6 +1,5 @@
 package com.example.blog.service;
 
-import com.example.blog.model.Categoria;
 import com.example.blog.model.Comentario;
 import com.example.blog.repository.ComentarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,16 +9,18 @@ import java.util.List;
 import java.util.Optional;
 
 @Service("ComentarioService")
-public class ComentarioServiceImpl {
+public class ComentarioServiceImpl implements ComentarioService{
 
     @Autowired
     ComentarioRepository comentarioRepository;
-
     @Override
     public Optional<Comentario> getComentarioById(Integer id){ return comentarioRepository.findById(id);}
 
     @Override
-    public void deleteAllComentarioById(Integer id) {
+    public List<Comentario> getAllComentario(){ return comentarioRepository.findAll();}
+
+    @Override
+    public void deleteComentarioById(Integer id) {
         comentarioRepository.deleteById(id);
     }
 

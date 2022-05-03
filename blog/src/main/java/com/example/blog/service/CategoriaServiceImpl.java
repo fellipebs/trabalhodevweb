@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service("CategoriaService")
-public class CategoriaServiceImpl {
+public class CategoriaServiceImpl implements CategoriaService {
     @Autowired
     CategoriaRepository categoriaRepository;
 
@@ -29,20 +29,20 @@ public class CategoriaServiceImpl {
     }
 
     @Override
-    public void deleteAllCategoriaById(Integer id) {
+    public void deleteCategoriaById(Integer id) {
         categoriaRepository.deleteById(id);
     }
 
     @Override
-    public void updateClienteById(Integer id, Categoria categoria) { categoriaRepository.save(categoria); }
+    public void updateCategoriaById(Integer id, Categoria categoria) { categoriaRepository.save(categoria); }
 
     @Override
-    public void updateCliente(Categoria categoria) {
+    public void updateCategoria(Categoria categoria) {
         categoriaRepository.save(categoria);
     }
 
     @Override
-    public void insertCliente(Categoria categoria) {
+    public void insertCategoria(Categoria categoria) {
         categoriaRepository.save(categoria);
     }
 
