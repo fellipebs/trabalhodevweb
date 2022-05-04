@@ -1,8 +1,5 @@
 package com.example.blog.service;
 
-
-import com.example.blog.model.Favoritos;
-import com.example.blog.model.Like;
 import com.example.blog.model.Post;
 import com.example.blog.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
