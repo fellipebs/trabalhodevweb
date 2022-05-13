@@ -17,19 +17,19 @@ public class FavoritosController {
     @Autowired
     FavoritosService favoritosService;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "/favoritos/", method = RequestMethod.GET)
     public ModelAndView form() {
         ModelAndView mav = new ModelAndView("index");
         mav.addObject("favoritos", favoritosService.getAllFavoritos());
         return mav;
     }
 
-    @RequestMapping(value = "/insert", method = RequestMethod.GET)
+    @RequestMapping(value = "/favoritos/insert", method = RequestMethod.GET)
     public ModelAndView insert() {
         return new ModelAndView("insert", "favoritos", new Favoritos());
     }
 
-    @RequestMapping(value = "/insert", method = RequestMethod.POST)
+    @RequestMapping(value = "/favoritos/insert", method = RequestMethod.POST)
     public String submitInsert(@Valid @ModelAttribute("favoritos")Favoritos favoritos, BindingResult result, ModelMap model) {
         if (result.hasErrors()) {
             return "error";
@@ -38,11 +38,11 @@ public class FavoritosController {
         return "redirect:";
     }
 
-    @RequestMapping(value = "/update", method = RequestMethod.GET)
+    @RequestMapping(value = "/favoritos/update", method = RequestMethod.GET)
     public ModelAndView update(Integer id) {
         return new ModelAndView("update", "favoritos", favoritosService.getFavoritosById(id).get());
     }
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    @RequestMapping(value = "/favoritos/update", method = RequestMethod.POST)
     public String submitUpdate(@Valid @ModelAttribute("favoritos")Favoritos favoritos, BindingResult result, ModelMap model) {
         if (result.hasErrors()) {
             return "error";
@@ -51,12 +51,12 @@ public class FavoritosController {
         return "redirect:";
     }
 
-    @RequestMapping(value = "/delete", method = RequestMethod.GET)
+    @RequestMapping(value = "/favoritos/delete", method = RequestMethod.GET)
     public ModelAndView delete(Integer id) {
         return new ModelAndView("delete", "favoritos", favoritosService.getFavoritosById(id).get());
     }
 
-    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/favoritos/delete", method = RequestMethod.POST)
     public String submitDelete(@Valid @ModelAttribute("favoritos")Favoritos favoritos, BindingResult result, ModelMap model) {
         if (result.hasErrors()) {
             return "error";

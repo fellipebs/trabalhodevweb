@@ -17,14 +17,14 @@ public class ComentarioController {
     @Autowired
     ComentarioService comentarioService;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "/comentario/", method = RequestMethod.GET)
     public ModelAndView form() {
         ModelAndView mav = new ModelAndView("index");
         mav.addObject("comentario", comentarioService.getAllComentario());
         return mav;
     }
 
-    @RequestMapping(value = "/insert", method = RequestMethod.GET)
+    @RequestMapping(value = "/comentario/insert", method = RequestMethod.GET)
     public ModelAndView insert() {
         return new ModelAndView("insert", "comentario", new Comentario());
     }
@@ -38,11 +38,11 @@ public class ComentarioController {
         return "redirect:";
     }
 
-    @RequestMapping(value = "/update", method = RequestMethod.GET)
+    @RequestMapping(value = "/comentario/update", method = RequestMethod.GET)
     public ModelAndView update(Integer id) {
         return new ModelAndView("update", "comentario", comentarioService.getComentarioById(id).get());
     }
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    @RequestMapping(value = "/comentario/update", method = RequestMethod.POST)
     public String submitUpdate(@Valid @ModelAttribute("comentario")Comentario comentario, BindingResult result, ModelMap model) {
         if (result.hasErrors()) {
             return "error";
@@ -51,12 +51,12 @@ public class ComentarioController {
         return "redirect:";
     }
 
-    @RequestMapping(value = "/delete", method = RequestMethod.GET)
+    @RequestMapping(value = "/comentario/delete", method = RequestMethod.GET)
     public ModelAndView delete(Integer id) {
         return new ModelAndView("delete", "comentario", comentarioService.getComentarioById(id).get());
     }
 
-    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/comentario/delete", method = RequestMethod.POST)
     public String submitDelete(@Valid @ModelAttribute("comentario")Comentario comentario, BindingResult result, ModelMap model) {
         if (result.hasErrors()) {
             return "error";

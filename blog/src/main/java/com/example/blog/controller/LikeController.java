@@ -18,19 +18,19 @@ public class LikeController {
     @Autowired
     LikeService likeService;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "/like/", method = RequestMethod.GET)
     public ModelAndView form() {
         ModelAndView mav = new ModelAndView("index");
         mav.addObject("like", likeService.getAllLike());
         return mav;
     }
 
-    @RequestMapping(value = "/insert", method = RequestMethod.GET)
+    @RequestMapping(value = "/like/insert", method = RequestMethod.GET)
     public ModelAndView insert() {
         return new ModelAndView("insert", "like", new Like());
     }
 
-    @RequestMapping(value = "/insert", method = RequestMethod.POST)
+    @RequestMapping(value = "/like/insert", method = RequestMethod.POST)
     public String submitInsert(@Valid @ModelAttribute("like")Like like, BindingResult result, ModelMap model) {
         if (result.hasErrors()) {
             return "error";
@@ -39,12 +39,12 @@ public class LikeController {
         return "redirect:";
     }
 
-    @RequestMapping(value = "/delete", method = RequestMethod.GET)
+    @RequestMapping(value = "/like/delete", method = RequestMethod.GET)
     public ModelAndView delete(Integer id) {
         return new ModelAndView("delete", "like", likeService.getLikeById(id).get());
     }
 
-    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/like/delete", method = RequestMethod.POST)
     public String submitDelete(@Valid @ModelAttribute("like")Like like, BindingResult result, ModelMap model) {
         if (result.hasErrors()) {
             return "error";

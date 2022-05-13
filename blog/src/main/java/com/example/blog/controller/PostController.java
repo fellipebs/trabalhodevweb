@@ -18,17 +18,17 @@ public class PostController {
     @Autowired
     PostService postService;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "/post/", method = RequestMethod.GET)
     public ModelAndView form() {
         ModelAndView mav = new ModelAndView("index");
         mav.addObject("post", postService.getAllPost());
         return mav;
     }
 
-    @RequestMapping(value = "/insert", method = RequestMethod.GET)
+    @RequestMapping(value = "/post/insert", method = RequestMethod.GET)
     public ModelAndView insert() { return new ModelAndView("insert", "post", new Post()); }
 
-    @RequestMapping(value = "/insert", method = RequestMethod.POST)
+    @RequestMapping(value = "/post/insert", method = RequestMethod.POST)
     public String submitInsert(@Valid @ModelAttribute("post")Post post, BindingResult result, ModelMap model) {
         if (result.hasErrors()) {
             return "error";
@@ -37,11 +37,11 @@ public class PostController {
         return "redirect:";
     }
 
-    @RequestMapping(value = "/update", method = RequestMethod.GET)
+    @RequestMapping(value = "/post/update", method = RequestMethod.GET)
     public ModelAndView update(Integer id) {
         return new ModelAndView("update", "post", postService.getPostById(id).get());
     }
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    @RequestMapping(value = "/post/update", method = RequestMethod.POST)
     public String submitUpdate(@Valid @ModelAttribute("post")Post post, BindingResult result, ModelMap model) {
         if (result.hasErrors()) {
             return "error";
@@ -50,12 +50,12 @@ public class PostController {
         return "redirect:";
     }
 
-    @RequestMapping(value = "/delete", method = RequestMethod.GET)
+    @RequestMapping(value = "/post/delete", method = RequestMethod.GET)
     public ModelAndView delete(Integer id) {
         return new ModelAndView("delete", "post", postService.getPostById(id).get());
     }
 
-    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/post/delete", method = RequestMethod.POST)
     public String submitDelete(@Valid @ModelAttribute("post")Post post, BindingResult result, ModelMap model) {
         if (result.hasErrors()) {
             return "error";

@@ -19,19 +19,19 @@ public class CategoriaController {
     @Autowired
     CategoriaService categoriaService;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "/categoria/", method = RequestMethod.GET)
     public ModelAndView form() {
         ModelAndView mav = new ModelAndView("index");
         mav.addObject("categoria", categoriaService.getAllCategoria());
         return mav;
     }
 
-    @RequestMapping(value = "/insert", method = RequestMethod.GET)
+    @RequestMapping(value = "/categoria/insert", method = RequestMethod.GET)
     public ModelAndView insert() {
         return new ModelAndView("insert", "categoria", new Categoria());
     }
 
-    @RequestMapping(value = "/insert", method = RequestMethod.POST)
+    @RequestMapping(value = "/categoria/insert", method = RequestMethod.POST)
     public String submitInsert(@Valid @ModelAttribute("categoria")Categoria categoria, BindingResult result, ModelMap model) {
         if (result.hasErrors()) {
             return "error";
@@ -40,11 +40,11 @@ public class CategoriaController {
         return "redirect:";
     }
 
-    @RequestMapping(value = "/update", method = RequestMethod.GET)
+    @RequestMapping(value = "/categoria/update", method = RequestMethod.GET)
     public ModelAndView update(Integer id) {
         return new ModelAndView("update", "categoria", categoriaService.getCategoriaById(id).get());
     }
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    @RequestMapping(value = "/categoria/update", method = RequestMethod.POST)
     public String submitUpdate(@Valid @ModelAttribute("categoria")Categoria categoria, BindingResult result, ModelMap model) {
         if (result.hasErrors()) {
             return "error";
@@ -53,12 +53,12 @@ public class CategoriaController {
         return "redirect:";
     }
 
-    @RequestMapping(value = "/delete", method = RequestMethod.GET)
+    @RequestMapping(value = "/categoria/delete", method = RequestMethod.GET)
     public ModelAndView delete(Integer id) {
         return new ModelAndView("delete", "categoria", categoriaService.getCategoriaById(id).get());
     }
 
-    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/categoria/delete", method = RequestMethod.POST)
     public String submitDelete(@Valid @ModelAttribute("categoria")Categoria categoria, BindingResult result, ModelMap model) {
         if (result.hasErrors()) {
             return "error";
