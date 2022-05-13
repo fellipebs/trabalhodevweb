@@ -11,8 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
+
 @Controller
 public class CategoriaController {
+
     @Autowired
     CategoriaService categoriaService;
 
@@ -29,7 +32,7 @@ public class CategoriaController {
     }
 
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
-    public String submitInsert(@ModelAttribute("categoria")Categoria categoria, BindingResult result, ModelMap model) {
+    public String submitInsert(@Valid @ModelAttribute("categoria")Categoria categoria, BindingResult result, ModelMap model) {
         if (result.hasErrors()) {
             return "error";
         }
@@ -42,7 +45,7 @@ public class CategoriaController {
         return new ModelAndView("update", "categoria", categoriaService.getCategoriaById(id).get());
     }
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String submitUpdate(@ModelAttribute("categoria")Categoria categoria, BindingResult result, ModelMap model) {
+    public String submitUpdate(@Valid @ModelAttribute("categoria")Categoria categoria, BindingResult result, ModelMap model) {
         if (result.hasErrors()) {
             return "error";
         }
@@ -56,7 +59,7 @@ public class CategoriaController {
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
-    public String submitDelete(@ModelAttribute("categoria")Categoria categoria, BindingResult result, ModelMap model) {
+    public String submitDelete(@Valid @ModelAttribute("categoria")Categoria categoria, BindingResult result, ModelMap model) {
         if (result.hasErrors()) {
             return "error";
         }
@@ -64,7 +67,5 @@ public class CategoriaController {
         return "redirect:";
 
     }
-
-
 
 }

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import javax.validation.Valid;
 
 @Controller
 public class UsuarioController {
@@ -30,7 +31,7 @@ public class UsuarioController {
     }
 
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
-    public String submitInsert(@ModelAttribute("usuario") Usuario usuario, BindingResult result, ModelMap model) {
+    public String submitInsert(@Valid @ModelAttribute("usuario") Usuario usuario, BindingResult result, ModelMap model) {
         if (result.hasErrors()) {
             return "error";
         }
@@ -44,7 +45,7 @@ public class UsuarioController {
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String submitUpdate(@ModelAttribute("usuario") Usuario usuario, BindingResult result, ModelMap model) {
+    public String submitUpdate(@Valid @ModelAttribute("usuario") Usuario usuario, BindingResult result, ModelMap model) {
         if (result.hasErrors()) {
             return "error";
         }
@@ -58,7 +59,7 @@ public class UsuarioController {
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
-    public String submitDelete(@ModelAttribute("usuario") Usuario usuario, BindingResult result, ModelMap model) {
+    public String submitDelete(@Valid @ModelAttribute("usuario") Usuario usuario, BindingResult result, ModelMap model) {
         if (result.hasErrors()) {
             return "error";
         }

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import javax.validation.Valid;
 
 @Controller
 public class FavoritosController {
@@ -29,7 +30,7 @@ public class FavoritosController {
     }
 
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
-    public String submitInsert(@ModelAttribute("favoritos")Favoritos favoritos, BindingResult result, ModelMap model) {
+    public String submitInsert(@Valid @ModelAttribute("favoritos")Favoritos favoritos, BindingResult result, ModelMap model) {
         if (result.hasErrors()) {
             return "error";
         }
@@ -42,7 +43,7 @@ public class FavoritosController {
         return new ModelAndView("update", "favoritos", favoritosService.getFavoritosById(id).get());
     }
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String submitUpdate(@ModelAttribute("favoritos")Favoritos favoritos, BindingResult result, ModelMap model) {
+    public String submitUpdate(@Valid @ModelAttribute("favoritos")Favoritos favoritos, BindingResult result, ModelMap model) {
         if (result.hasErrors()) {
             return "error";
         }
@@ -56,7 +57,7 @@ public class FavoritosController {
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
-    public String submitDelete(@ModelAttribute("favoritos")Favoritos favoritos, BindingResult result, ModelMap model) {
+    public String submitDelete(@Valid @ModelAttribute("favoritos")Favoritos favoritos, BindingResult result, ModelMap model) {
         if (result.hasErrors()) {
             return "error";
         }
