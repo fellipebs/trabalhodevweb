@@ -10,7 +10,7 @@ import javax.persistence.OneToOne;
 @Entity
 public class Usuario {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)    
+    @GeneratedValue(strategy = GenerationType.IDENTITY)    
 
     private int idUsuario;
     private String nome;
@@ -18,6 +18,20 @@ public class Usuario {
     private String senha;
     private String foto;
     private String biografia;
+
+    public Usuario(int id_usuario, String nome_usuario, String email_usuario, String senha_usuario, String foto_usuario, String biografia_usuario, PerfilAcesso perfilAcesso){
+        this.idUsuario = id_usuario;
+        this.nome = nome_usuario;
+        this.email = email_usuario;
+        this.senha = senha_usuario;
+        this.foto = foto_usuario;
+        this.biografia = biografia_usuario;
+        this.perfilAcesso = perfilAcesso;
+    }
+
+    public Usuario(){
+        // precisa de dois construtores para rodar a população do DB
+    }
 
     @OneToOne
     @JoinColumn(name = "id_perfil_acesso", nullable = false)

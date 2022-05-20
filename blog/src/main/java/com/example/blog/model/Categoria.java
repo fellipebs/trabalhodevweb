@@ -8,10 +8,19 @@ import javax.persistence.Id;
 @Entity
 public class Categoria {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private int idCategoria;
     private String nome;
+
+    public Categoria(int id_categoria, String nome_categoria){
+        this.idCategoria = id_categoria;
+        this.nome = nome_categoria;
+    }
+
+    public Categoria(){
+        // precisa de dois construtores para rodar a população do DB
+    }
 
     public int getIdCategoria() {
         return idCategoria;

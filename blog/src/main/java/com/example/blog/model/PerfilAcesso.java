@@ -8,10 +8,19 @@ import javax.persistence.Id;
 @Entity
 public class PerfilAcesso {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private int idPerfilAcesso;
-    private String tipo;
+    private String tipo;  
+    
+    public PerfilAcesso(int id_perfil, String tipo_perfil){
+        this.idPerfilAcesso = id_perfil;
+        this.tipo = tipo_perfil;
+    }
+
+    public PerfilAcesso(){
+        // precisa de dois construtores para rodar a população do DB
+    }
 
     public int getIdPerfilAcesso() {
         return idPerfilAcesso;

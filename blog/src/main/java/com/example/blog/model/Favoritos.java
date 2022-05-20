@@ -10,16 +10,26 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Favoritos {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private int idFavoritos;
 
+    public Favoritos(int id_favorito, Post post, Usuario usuario) {
+        this.idFavoritos = id_favorito;
+        this.post = post;
+        this.usuario = usuario;
+    }
+
+    public Favoritos() {
+        // precisa de dois construtores para rodar a população do DB
+    }
+
     @ManyToOne
-    @JoinColumn(name="id_usuario", nullable=false)
+    @JoinColumn(name = "id_usuario", nullable = false)
     private Usuario usuario;
 
     @ManyToOne
-    @JoinColumn(name="id_post", nullable=false)
+    @JoinColumn(name = "id_post", nullable = false)
     private Post post;
 
     public int getIdFavoritos() {
@@ -31,19 +41,19 @@ public class Favoritos {
     }
 
     // Tabelas estrangeiras
-    public Usuario getUsuario(){
+    public Usuario getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(Usuario usuario){
+    public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
 
-    public Post getPost(){
+    public Post getPost() {
         return post;
     }
 
-    public void setPost(Post post){
+    public void setPost(Post post) {
         this.post = post;
     }
 

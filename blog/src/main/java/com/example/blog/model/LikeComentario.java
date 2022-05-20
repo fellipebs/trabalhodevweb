@@ -5,7 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 @Entity
 public class LikeComentario {
@@ -14,13 +14,13 @@ public class LikeComentario {
 
     private int idLikeComentario;
 
-    @ManyToOne
-    @JoinColumn(name = "id_post", nullable = false)
-    private Post post;
+    @OneToOne
+    @JoinColumn(name = "id_usuario", nullable = false)
+    private Usuario usuario;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "id_comentario", nullable = false)
-    private Comentario comentario;
+    private Comentario comentario;    
 
     public int getIdLike() {
         return idLikeComentario;
@@ -31,20 +31,20 @@ public class LikeComentario {
     }
 
     // Tabelas estrangeiras
-    public Post getPost() {
-        return post;
-    }
-
-    public void setPost(Post post) {
-        this.post = post;
-    }
-
     public Comentario getComentario() {
         return comentario;
     }
 
     public void setComentario(Comentario comentario) {
         this.comentario = comentario;
+    }
+
+    public Usuario getUsuario(){
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario){
+        this.usuario = usuario;
     }
 
 }
