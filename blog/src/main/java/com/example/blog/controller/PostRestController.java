@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
+// import java.util.Optional;
 
 @RestController
 public class PostRestController {
@@ -19,10 +19,10 @@ public class PostRestController {
         return postService.getAllPost();
     }
 
-    @RequestMapping(value = "/post/{id}", method = RequestMethod.GET)
-    public Optional<Post> getName(@PathVariable Integer id) {
-        return postService.getPostById(id);
-    }
+    // @RequestMapping(value = "/post/{id}", method = RequestMethod.GET)
+    // public Optional<Post> getName(@PathVariable Integer id) {
+    //     return postService.getPostById(id);
+    // }
 
     @RequestMapping(value = "/post", method = RequestMethod.POST)
     public void post(@RequestBody Post post) { postService.updatePost(post); }

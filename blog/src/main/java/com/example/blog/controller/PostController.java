@@ -2,11 +2,13 @@ package com.example.blog.controller;
 
 import com.example.blog.model.Post;
 import com.example.blog.service.PostService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -16,12 +18,12 @@ import javax.validation.Valid;
 public class PostController {
 
     @Autowired
-    PostService postService;
+    PostService postService;    
 
-    @RequestMapping(value = "/post/", method = RequestMethod.GET)
-    public ModelAndView form() {
-        ModelAndView mav = new ModelAndView("index");
-        mav.addObject("post", postService.getAllPost());
+    @RequestMapping(value = "/post/{id}", method = RequestMethod.GET)
+    public ModelAndView readPost(@PathVariable Integer id) {
+        ModelAndView mav = new ModelAndView("readpost");
+        postService.getPostById(id).ifPresent(val -> mav.addObject("post", val));
         return mav;
     }
 
@@ -41,6 +43,7 @@ public class PostController {
     public ModelAndView update(Integer id) {
         return new ModelAndView("update", "post", postService.getPostById(id).get());
     }
+
     @RequestMapping(value = "/post/update", method = RequestMethod.POST)
     public String submitUpdate(@Valid @ModelAttribute("post")Post post, BindingResult result, ModelMap model) {
         if (result.hasErrors()) {

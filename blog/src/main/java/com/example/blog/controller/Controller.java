@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.example.blog.service.PostService;
+import com.example.blog.service.CategoriaService;
 
 @org.springframework.stereotype.Controller
 public class Controller {
@@ -12,10 +13,14 @@ public class Controller {
     @Autowired
     PostService postService;
 
+    @Autowired
+    CategoriaService categoriaService;
+
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView index() {
         ModelAndView mav = new ModelAndView("index");
         mav.addObject("allPosts", postService.getAllPost());
+        mav.addObject("allCategorias", categoriaService.getAllCategoria());
         return mav;
     }
 
