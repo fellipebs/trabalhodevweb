@@ -1,6 +1,5 @@
 package com.example.blog.service;
 
-import com.example.blog.model.Post;
 import com.example.blog.model.Usuario;
 import com.example.blog.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;

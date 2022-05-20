@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.w3.org/1999/xhtml">
+  <head th:replace="includes/header"></head>
+  <body>
+    <!-- NAVBAR -->
+    <div th:replace="includes/navbar"></div>
+
+    <!-- Page content-->
+    <div class="container mt-5">
+      <div class="row">
+        <!-- Post info container -->
+        <div class="col-md-8">
+          <div class="card">
+            <!-- Card header -->
+            <div class="card-header">Informações do post</div>
+            <!-- Card body -->
+            <div class="card-body">
+              <form action="#" class="pt-2">
+                <!-- Title of the post -->
+                <div class="form-group">
+                  <label class="col-lg-3 control-label">Título do post:</label>
+                  <div class="col-lg-8">
+                    <input
+                      class="form-control"
+                      type="text"
+                      name="title"
+                      placeholder="Ex.: Como fazer css bonitinho"
+                    />
+                  </div>
+                </div>
+
+                <!-- Theme selector -->
+                <div class="form-group">
+                  <label>Tema:</label>
+                  <div class="col-lg-8">
+                    <select class="form-control" name="theme">
+                      <option selected>Selecione um tema</option>
+                      <option>Tema 1</option>
+                      <option>Tema 2</option>
+                      <option>Tema 3</option>
+                      <option>Tema 4</option>
+                      <option>Tema 5</option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- Textarea for post content using ck editor -->
+                <div class="form-group">
+                  <label>Digite o conteúdo do seu post:</label>
+                  <textarea
+                    class="form-control"
+                    name="text"
+                    id="textarea"
+                  ></textarea>
+                </div>
+              </form>
+            </div>
+            <!-- Card footer -->
+            <div class="card-footer pb-3 pt-3">
+              <button type="submit" name="Postar" class="btn btn-success">
+                Postar
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Post photo container -->
+        <div class="col-md-4">
+          <div class="card">
+            <!-- Card header -->
+            <div class="card-header">Foto do post</div>
+            <!-- Card body -->
+            <div class="card-body text-center">
+              <img
+                src="https://c.tenor.com/Q823-830Ri0AAAAd/christian-bale-american-psycho.gif"
+                class=""
+                width="200"
+                height="200"
+                alt="avatar"
+              />
+            </div>
+            <!-- Card footer -->
+            <div class="card-footer text-center">
+              <form
+                action="#"
+                method="post"
+                enctype="multipart/form-data"
+                class=""
+              >
+                <input type="file" name="file" class="form-control btn" />
+                <button type="submit" class="btn btn-success" name="submit">
+                  Enviar foto
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /.container -->
+
+    <!-- Footer -->
+    <div th:replace="includes/footer">
+
+    <!-- Ckeditor javascript -->
+    <script>
+      ClassicEditor.create(document.querySelector("#textarea"))
+        .then((editor) => {
+          console.log(editor);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    </script>
+
+    <!-- Bootstrap core JavaScript -->
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+      integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
