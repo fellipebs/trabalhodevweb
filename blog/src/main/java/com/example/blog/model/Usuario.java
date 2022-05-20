@@ -5,16 +5,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Usuario {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-
-    @ManyToOne
-    @JoinColumn(name = "id_perfil_acesso", nullable = false)
-    private PerfilAcesso perfilAcesso;
+    @GeneratedValue(strategy = GenerationType.AUTO)    
 
     private int idUsuario;
     private String nome;
@@ -22,6 +18,10 @@ public class Usuario {
     private String senha;
     private String foto;
     private String biografia;
+
+    @OneToOne
+    @JoinColumn(name = "id_perfil_acesso", nullable = false)
+    private PerfilAcesso perfilAcesso;
 
     public int getIdUsuario() {
         return idUsuario;
