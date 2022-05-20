@@ -2,13 +2,21 @@ package com.example.blog.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.beans.factory.annotation.Autowired;
+import com.example.blog.service.PostService;
 
 @org.springframework.stereotype.Controller
 public class Controller {
 
+    @Autowired
+    PostService postService;
+
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String index() {
-        return "index";
+    public ModelAndView index() {
+        ModelAndView mav = new ModelAndView("index");
+        mav.addObject("allPosts", postService.getAllPost());
+        return mav;
     }
 
     @RequestMapping(value = "/criarpost", method = RequestMethod.GET)

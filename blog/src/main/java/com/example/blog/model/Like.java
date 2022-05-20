@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Like {
@@ -11,8 +13,14 @@ public class Like {
     @GeneratedValue(strategy = GenerationType.AUTO)
 
     private int idLike;
-    private int idPost;
-    private int idComentario;
+
+    @ManyToOne
+    @JoinColumn(name = "id_post", nullable = false)
+    private Post post;
+
+    @ManyToOne
+    @JoinColumn(name = "id_comentario", nullable = false)
+    private Comentario comentario;
 
     public int getIdLike() {
         return idLike;
@@ -22,24 +30,21 @@ public class Like {
         this.idLike = idLike;
     }
 
-    public int getIdPost() {
-        return idPost;
+    // Tabelas estrangeiras
+    public Post getPost() {
+        return post;
     }
 
-    public void setIdPost(int idPost) {
-        this.idPost = idPost;
+    public void setPost(Post post) {
+        this.post = post;
     }
 
-    public int getIdComentario() {
-        return idComentario;
+    public Comentario getComentario() {
+        return comentario;
     }
 
-    public void setIdComentario(int idComentario) {
-        this.idComentario = idComentario;
+    public void setComentario(Comentario comentario) {
+        this.comentario = comentario;
     }
-
-
-
-
 
 }

@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Comentario {
@@ -12,7 +14,14 @@ public class Comentario {
 
     private int idComentario;
     private String comentario;
-    private int idUsuario;
+
+    @ManyToOne
+    @JoinColumn(name="id_usuario", nullable=false)
+    private Usuario usuario;
+
+    @ManyToOne
+    @JoinColumn(name="id_post", nullable=false)
+    private Post post;
 
     public int getIdComentario() {
         return idComentario;
@@ -30,12 +39,21 @@ public class Comentario {
         this.comentario = comentario;
     }
 
-    public int getIdUsuario() {
-        return idUsuario;
+    // Tabelas estrangeiras
+    public Usuario getUsuario(){
+        return usuario;
     }
 
-    public void setIdUsuario(int idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setUsuario(Usuario usuario){
+        this.usuario = usuario;
+    }
+
+    public Post getPost(){
+        return post;
+    }
+
+    public void setPost(Post post){
+        this.post = post;
     }
 
 }

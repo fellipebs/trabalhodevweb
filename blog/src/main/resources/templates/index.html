@@ -9,151 +9,42 @@
     <!-- Page content-->
     <div class="container mt-5">
       <div class="row">
-        <div class="col-lg-8">
+        <div class="col-lg-8" >
 
-          <!-- Post content 1 -->
-          <article class="card mb-4">
-            <!-- Post header-->
-            <header class="card-header pb-2">
-              <!-- Post title-->
-              <h1 class="fw-bolder mb-1">TITULO DO POST</h1>
-              <!-- Post meta content-->
-              <div class="text-muted fst-italic mb-2">
-                POSTADO EM 30 DE JANEIRO DE 2021, por AUTOR
+          <!-- All posts -->
+          <div th:each="post : ${allPosts}">
+            <article class="card mb-4">
+              <!-- Post header-->
+              <header class="card-header pb-2">
+                <!-- Post title-->
+                <h1 class="fw-bolder mb-1" th:text="${post.titulo}"></h1>
+                <!-- Post meta content-->
+                <div class="text-muted fst-italic mb-2" th:text="'Post feito por ' + ${post.usuario.nome}"></div>
+                <!-- Post categories-->
+                <a class="badge bg-secondary text-decoration-none link-light" href="#!" th:text="${post.categoria.nome}"></a>
+              </header>
+  
+              <!-- Post body-->
+              <div class="card-body">
+                <figure class="mb-4">
+                  <!-- Preview image figure-->
+                  <img
+                          class="img-fluid rounded"
+                          src="https://dummyimage.com/900x400/ced4da/6c757d.jpg"
+                          alt="..."
+                  />
+                </figure>
               </div>
-              <!-- Post categories-->
-              <a
-                      class="badge bg-secondary text-decoration-none link-light"
-                      href="#!"
-              >TEMA 1</a
-              >
-              <a
-                      class="badge bg-secondary text-decoration-none link-light"
-                      href="#!"
-              >TEMA 2</a
-              >
-            </header>
-
-            <!-- Post body-->
-            <div class="card-body">
-              <figure class="mb-4">
-                <!-- Preview image figure-->
-                <img
-                        class="img-fluid rounded"
-                        src="https://dummyimage.com/900x400/ced4da/6c757d.jpg"
-                        alt="..."
-                />
-              </figure>
-              <p class="fs-5 mb-2">
-                Science is an enterprise that should be cherished as an activity
-                of the free human mind. Because it transforms who we are, how we
-                live, and it gives us an understanding of our place in the
-                universe.
-              </p>
-            </div>
-
-            <!-- Post footer -->
-            <div class="card-footer pb-2 pt-2">
-              <a href='#' class="btn btn-danger">Apagar &rarr;</a>
-              <a href='#' class="btn btn-warning">Editar &rarr;</a>
-            </div>
-          </article>
-
-          <!-- Post content 2 -->
-          <article class="card mb-4">
-            <!-- Post header-->
-            <header class="card-header pb-2">
-              <!-- Post title-->
-              <h1 class="fw-bolder mb-1">TITULO DO POST</h1>
-              <!-- Post meta content-->
-              <div class="text-muted fst-italic mb-2">
-                POSTADO EM 30 DE JANEIRO DE 2021, por AUTOR
+  
+              <!-- Post footer -->
+              <div class="card-footer pb-2 pt-2">
+                <a href='#' class="btn btn-danger">Apagar &rarr;</a>
+                <a href='#' class="btn btn-warning">Editar &rarr;</a>
+                <a href='#' class="btn btn-primary">Ler &rarr;</a>
               </div>
-              <!-- Post categories-->
-              <a
-                      class="badge bg-secondary text-decoration-none link-light"
-                      href="#!"
-              >TEMA 1</a
-              >
-              <a
-                      class="badge bg-secondary text-decoration-none link-light"
-                      href="#!"
-              >TEMA 2</a
-              >
-            </header>
-
-            <!-- Post body-->
-            <div class="card-body">
-              <figure class="mb-4">
-                <!-- Preview image figure-->
-                <img
-                        class="img-fluid rounded"
-                        src="https://dummyimage.com/900x400/ced4da/6c757d.jpg"
-                        alt="..."
-                />
-              </figure>
-              <p class="fs-5 mb-2">
-                Science is an enterprise that should be cherished as an activity
-                of the free human mind. Because it transforms who we are, how we
-                live, and it gives us an understanding of our place in the
-                universe.
-              </p>
-            </div>
-
-            <!-- Post footer -->
-            <div class="card-footer pb-2 pt-2">
-              <a href='#' class="btn btn-danger">Apagar &rarr;</a>
-              <a href='#' class="btn btn-warning">Editar &rarr;</a>
-            </div>
-          </article>
-
-          <!-- Post content 3 -->
-          <article class="card mb-4">
-            <!-- Post header-->
-            <header class="card-header pb-2">
-              <!-- Post title-->
-              <h1 class="fw-bolder mb-1">TITULO DO POST</h1>
-              <!-- Post meta content-->
-              <div class="text-muted fst-italic mb-2">
-                POSTADO EM 30 DE JANEIRO DE 2021, por AUTOR
-              </div>
-              <!-- Post categories-->
-              <a
-                      class="badge bg-secondary text-decoration-none link-light"
-                      href="#!"
-              >TEMA 1</a
-              >
-              <a
-                      class="badge bg-secondary text-decoration-none link-light"
-                      href="#!"
-              >TEMA 2</a
-              >
-            </header>
-
-            <!-- Post body-->
-            <div class="card-body">
-              <figure class="mb-4">
-                <!-- Preview image figure-->
-                <img
-                        class="img-fluid rounded"
-                        src="https://dummyimage.com/900x400/ced4da/6c757d.jpg"
-                        alt="..."
-                />
-              </figure>
-              <p class="fs-5 mb-2">
-                Science is an enterprise that should be cherished as an activity
-                of the free human mind. Because it transforms who we are, how we
-                live, and it gives us an understanding of our place in the
-                universe.
-              </p>
-            </div>
-
-            <!-- Post footer -->
-            <div class="card-footer pb-2 pt-2">
-              <a href='#' class="btn btn-danger">Apagar &rarr;</a>
-              <a href='#' class="btn btn-warning">Editar &rarr;</a>
-            </div>
-          </article>
+            </article> 
+          </div>
+                  
 
         </div>
 

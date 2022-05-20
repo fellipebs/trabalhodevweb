@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Favoritos {
@@ -11,8 +13,14 @@ public class Favoritos {
     @GeneratedValue(strategy = GenerationType.AUTO)
 
     private int idFavoritos;
-    private int idPost;
-    private int idUsuario;
+
+    @ManyToOne
+    @JoinColumn(name="id_usuario", nullable=false)
+    private Usuario usuario;
+
+    @ManyToOne
+    @JoinColumn(name="id_post", nullable=false)
+    private Post post;
 
     public int getIdFavoritos() {
         return idFavoritos;
@@ -22,20 +30,21 @@ public class Favoritos {
         this.idFavoritos = idFavoritos;
     }
 
-    public int getIdPost() {
-        return idPost;
+    // Tabelas estrangeiras
+    public Usuario getUsuario(){
+        return usuario;
     }
 
-    public void setIdPost(int idPost) {
-        this.idPost = idPost;
+    public void setUsuario(Usuario usuario){
+        this.usuario = usuario;
     }
 
-    public int getIdUsuario() {
-        return idUsuario;
+    public Post getPost(){
+        return post;
     }
 
-    public void setIdUsuario(int idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setPost(Post post){
+        this.post = post;
     }
 
 }

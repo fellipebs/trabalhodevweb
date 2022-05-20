@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Post {
@@ -11,10 +13,16 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.AUTO)
 
     private int idPost;
-    private int idUsuario;
-    private int idCategoria;
     private String titulo;
     private String conteudo;
+
+    @ManyToOne
+    @JoinColumn(name="id_usuario", nullable=false)
+    private Usuario usuario;
+
+    @ManyToOne
+    @JoinColumn(name="id_categoria", nullable=false)
+    private Categoria categoria;
 
     public int getIdPost() {
         return idPost;
@@ -22,22 +30,6 @@ public class Post {
 
     public void setIdPost(int idPost) {
         this.idPost = idPost;
-    }
-
-    public int getIdUsuario() {
-        return idUsuario;
-    }
-
-    public void setIdUsuario(int idUsuario) {
-        this.idUsuario = idUsuario;
-    }
-
-    public int getIdCategoria() {
-        return idCategoria;
-    }
-
-    public void setIdCategoria(int idCategoria) {
-        this.idCategoria = idCategoria;
     }
 
     public String getTitulo() {
@@ -54,6 +46,23 @@ public class Post {
 
     public void setConteudo(String conteudo) {
         this.conteudo = conteudo;
+    }
+
+    // Tabelas estrangeiras
+    public Usuario getUsuario(){
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario){
+        this.usuario = usuario;
+    }
+
+    public Categoria getCategoria(){
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria){
+        this.categoria = categoria;
     }
 
 }
