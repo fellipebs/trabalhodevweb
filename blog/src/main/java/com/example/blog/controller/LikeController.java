@@ -1,6 +1,6 @@
 package com.example.blog.controller;
 
-import com.example.blog.model.Like;
+import com.example.blog.model.LikeComentario;
 import com.example.blog.service.LikeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,11 +27,11 @@ public class LikeController {
 
     @RequestMapping(value = "/like/insert", method = RequestMethod.GET)
     public ModelAndView insert() {
-        return new ModelAndView("insert", "like", new Like());
+        return new ModelAndView("insert", "like", new LikeComentario());
     }
 
     @RequestMapping(value = "/like/insert", method = RequestMethod.POST)
-    public String submitInsert(@Valid @ModelAttribute("like")Like like, BindingResult result, ModelMap model) {
+    public String submitInsert(@Valid @ModelAttribute("like")LikeComentario like, BindingResult result, ModelMap model) {
         if (result.hasErrors()) {
             return "error";
         }
@@ -45,7 +45,7 @@ public class LikeController {
     }
 
     @RequestMapping(value = "/like/delete", method = RequestMethod.POST)
-    public String submitDelete(@Valid @ModelAttribute("like")Like like, BindingResult result, ModelMap model) {
+    public String submitDelete(@Valid @ModelAttribute("like")LikeComentario like, BindingResult result, ModelMap model) {
         if (result.hasErrors()) {
             return "error";
         }

@@ -1,6 +1,6 @@
 package com.example.blog.service;
 
-import com.example.blog.model.Like;
+import com.example.blog.model.LikeComentario;
 import com.example.blog.repository.LikeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,16 +15,16 @@ public class LikeServiceImpl implements LikeService{
     LikeRepository likeRepository;
 
     @Override
-    public Optional<Like> getLikeById(Integer id){ return likeRepository.findById(id);}
+    public Optional<LikeComentario> getLikeById(Integer id){ return likeRepository.findById(id);}
 
     @Override
-    public List<Like> getAllLike() { return likeRepository.findAll();}
+    public List<LikeComentario> getAllLike() { return likeRepository.findAll();}
 
     @Override
     public void deleteLikeById(Integer id) { likeRepository.deleteAll(); }
 
     @Override
-    public void insertlike(Like like) {
+    public void insertlike(LikeComentario like) {
         likeRepository.save(like);
     }
 }

@@ -1,12 +1,12 @@
 package com.example.blog.service;
 
-import com.example.blog.model.Like;
+import com.example.blog.model.LikeComentario;
 import java.util.List;
 import java.util.Optional;
 
 public interface LikeService {
-    Optional<Like> getLikeById(Integer id);
-    List<Like> getAllLike();
+    Optional<LikeComentario> getLikeById(Integer id);
+    List<LikeComentario> getAllLike();
     void deleteLikeById(Integer id);
-    void insertlike(Like Like);
+    void insertlike(LikeComentario Like);
 }
