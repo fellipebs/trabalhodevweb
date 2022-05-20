@@ -11,7 +11,7 @@ public class Controller {
         return "index";
     }
 
-    @RequestMapping(value = "/criar", method = RequestMethod.GET)
+    @RequestMapping(value = "/criarpost", method = RequestMethod.GET)
     public String criarPost() {
         return "criarpost";
     }
@@ -26,7 +26,7 @@ public class Controller {
         return "editarpost";
     }
 
-    @RequestMapping(value = "/cadastrarP", method = RequestMethod.GET)
+    @RequestMapping(value = "/cadastrar", method = RequestMethod.GET)
     public String cadastrar() {
         return "cadastrar";
     }
