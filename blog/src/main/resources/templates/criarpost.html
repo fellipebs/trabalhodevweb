@@ -1,6 +1,5 @@
-<<<<<<< HEAD
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" xmlns:th="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
     <meta
@@ -17,7 +16,10 @@
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
       crossorigin="anonymous"
     />
-    
+
+    <!-- CKEDITOR CDN -->
+    <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
+
     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
       integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -44,11 +46,13 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+
     <link
       href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic"
       rel="stylesheet"
       type="text/css"
     />
+
     <link
       href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
       rel="stylesheet"
@@ -56,7 +60,8 @@
     />
 
     <!-- Custom styles for this template -->
-    <link href="css/clean-blog.min.css" rel="stylesheet" />
+    <link rel="stylesheet" th:href="@{/css/clean-blog.min.css}" />
+
   </head>
   <body>
     <!-- NAVBAR -->
@@ -87,7 +92,10 @@
               <a class="nav-link" href="#">Home </a>
             </li>
 
-
+            <!-- EXCLUSIVO PARA ADMINS E AUTORES -->
+            <li class="nav-item">
+              <a class="nav-link" href="#">Novo Post</a>
+            </li>
 
             <!-- PARA USUÁRIOS DESLOGADOS -->
             <li class="nav-item dropdown">
@@ -109,7 +117,36 @@
                 <a class="dropdown-item" href="#">Cadastrar</a>
               </div>
             </li>
-            
+
+            <!-- PARA USUÁRIOS LOGADOS -->
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdownMenuLink"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                Olá, USUÁRIO
+              </a>
+              <div
+                class="dropdown-menu"
+                aria-labelledby="navbarDropdownMenuLink"
+              >
+                <a class="dropdown-item" href="#">Editar perfil</a>
+                <a class="dropdown-item" href="#">Sair</a>
+              </div>
+            </li>
+            <li class="nav-item">
+              <img
+                src="https://picsum.photos/200/300"
+                class="rounded-circle mx-auto d-block"
+                alt="Foto de Perfil"
+                style="width: 50px; height: 50px"
+                ;
+              />
+            </li>
           </ul>
         </div>
       </nav>
@@ -118,77 +155,90 @@
     <!-- Page content-->
     <div class="container mt-5">
       <div class="row">
-        <!-- Align container -->
-        <div class="col-md-2"></div>
-        <!-- Register container -->
+        <!-- Post info container -->
         <div class="col-md-8">
           <div class="card">
             <!-- Card header -->
-            <div class="card-header">Cadastrar</div>
+            <div class="card-header">Informações do post</div>
             <!-- Card body -->
             <div class="card-body">
-              <div class="alert alert-danger" role="alert">
-                Alerta se vocês quiserem colocar se o cara errar alguma coisa
-                🤨🤨🤨🤨🤨🤨🤨🤨🤨
-              </div>
               <form action="#" class="pt-2">
-                <!-- Username -->
-                <div class="form-group col-md-7">
-                  <label class="control-label">Digite o seu nome de usuário:</label>
+                <!-- Title of the post -->
+                <div class="form-group">
+                  <label class="col-lg-3 control-label">Título do post:</label>
+                  <div class="col-lg-8">
                     <input
                       class="form-control"
                       type="text"
-                      name="username"
+                      name="title"
+                      placeholder="Ex.: Como fazer css bonitinho"
                     />
+                  </div>
                 </div>
 
-                <!-- Name -->
-                <div class="form-group col-md-7">
-                  <label class="control-label">Digite o seu nome:</label>
-                    <input
-                      class="form-control"
-                      type="text"
-                      name="name"
-                    />
+                <!-- Theme selector -->
+                <div class="form-group">
+                  <label>Tema:</label>
+                  <div class="col-lg-8">
+                    <select class="form-control" name="theme">
+                      <option selected>Selecione um tema</option>
+                      <option>Tema 1</option>
+                      <option>Tema 2</option>
+                      <option>Tema 3</option>
+                      <option>Tema 4</option>
+                      <option>Tema 5</option>
+                    </select>
+                  </div>
                 </div>
 
-                <!-- Email -->
-                <div class="form-group col-md-7">
-                  <label class="control-label">Digite o seu email:</label>
-                    <input
-                      class="form-control"
-                      type="text"
-                      name="email"
-                    />
+                <!-- Textarea for post content using ck editor -->
+                <div class="form-group">
+                  <label>Digite o conteúdo do seu post:</label>
+                  <textarea
+                    class="form-control"
+                    name="text"
+                    id="textarea"
+                  ></textarea>
                 </div>
-
-                <!-- Password -->
-                <div class="form-group col-md-7">
-                  <label class="control-label">Senha:</label>
-                    <input
-                      class="form-control"
-                      type="password"
-                      name="password"
-                    />
-                </div>
-
-                <!-- Confirm password -->
-                <div class="form-group col-md-7">
-                  <label class="control-label">Confirme sua senha:</label>
-                    <input
-                      class="form-control"
-                      type="password"
-                      name="confirmpwd"
-                    />
-                </div>
-
               </form>
             </div>
             <!-- Card footer -->
             <div class="card-footer pb-3 pt-3">
-              <button type="submit" name="Postar" class="btn btn-success w-100">
-                Cadastrar
+              <button type="submit" name="Postar" class="btn btn-success">
+                Postar
               </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Post photo container -->
+        <div class="col-md-4">
+          <div class="card">
+            <!-- Card header -->
+            <div class="card-header">Foto do post</div>
+            <!-- Card body -->
+            <div class="card-body text-center">
+              <img
+                src="https://c.tenor.com/Q823-830Ri0AAAAd/christian-bale-american-psycho.gif"
+                class=""
+                width="200"
+                height="200"
+                alt="avatar"
+              />
+            </div>
+            <!-- Card footer -->
+            <div class="card-footer text-center">
+              <form
+                action="#"
+                method="post"
+                enctype="multipart/form-data"
+                class=""
+              >
+                <input type="file" name="file" class="form-control btn" />
+                <button type="submit" class="btn btn-success" name="submit">
+                  Enviar foto
+                </button>
+              </form>
             </div>
           </div>
         </div>
@@ -235,116 +285,16 @@
       </div>
     </div>
 
-    <!-- Bootstrap core JavaScript -->
-    <script
-      src="https://code.jquery.com/jquery-3.6.0.min.js"
-      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
-      integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
-      crossorigin="anonymous"
-    ></script>
-  </body>
-</html>
-=======
-<!DOCTYPE html>
-<html lang="pt-br">
-  <head th:replace="includes/header"></head>
-
-  <body>
-    <!-- NAVBAR -->
-    <div th:replace="includes/navbar"></div>
-
-    <!-- Page content-->
-    <div class="container mt-5">
-      <div class="row">
-        <!-- Align container -->
-        <div class="col-md-2"></div>
-        <!-- Register container -->
-        <div class="col-md-8">
-          <div class="card">
-            <!-- Card header -->
-            <div class="card-header">Cadastrar</div>
-            <!-- Card body -->
-            <div class="card-body">
-              <div class="alert alert-danger" role="alert">
-                Alerta se vocês quiserem colocar se o cara errar alguma coisa
-                🤨🤨🤨🤨🤨🤨🤨🤨🤨
-              </div>
-              <form action="#" class="pt-2">
-                <!-- Username -->
-                <div class="form-group col-md-7">
-                  <label class="control-label">Digite o seu nome de usuário:</label>
-                    <input
-                      class="form-control"
-                      type="text"
-                      name="username"
-                    />
-                </div>
-
-                <!-- Name -->
-                <div class="form-group col-md-7">
-                  <label class="control-label">Digite o seu nome:</label>
-                    <input
-                      class="form-control"
-                      type="text"
-                      name="name"
-                    />
-                </div>
-
-                <!-- Email -->
-                <div class="form-group col-md-7">
-                  <label class="control-label">Digite o seu email:</label>
-                    <input
-                      class="form-control"
-                      type="text"
-                      name="email"
-                    />
-                </div>
-
-                <!-- Password -->
-                <div class="form-group col-md-7">
-                  <label class="control-label">Senha:</label>
-                    <input
-                      class="form-control"
-                      type="password"
-                      name="password"
-                    />
-                </div>
-
-                <!-- Confirm password -->
-                <div class="form-group col-md-7">
-                  <label class="control-label">Confirme sua senha:</label>
-                    <input
-                      class="form-control"
-                      type="password"
-                      name="confirmpwd"
-                    />
-                </div>
-
-              </form>
-            </div>
-            <!-- Card footer -->
-            <div class="card-footer pb-3 pt-3">
-              <button type="submit" name="Postar" class="btn btn-success w-100">
-                Cadastrar
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- /.container -->
-
-    <!-- Footer -->
-    <div th:replace="includes/footer">
+    <!-- Ckeditor javascript -->
+    <script>
+      ClassicEditor.create(document.querySelector("#textarea"))
+        .then((editor) => {
+          console.log(editor);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    </script>
 
     <!-- Bootstrap core JavaScript -->
     <script
@@ -364,4 +314,3 @@
     ></script>
   </body>
 </html>
->>>>>>> rotas html com css

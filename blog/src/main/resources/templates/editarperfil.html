@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.w3.org/1999/xhtml">
+  <head th:replace="includes/header"></head>
+
+  <body>
+    <!-- NAVBAR -->
+    <div th:replace="includes/navbar"></div>
+
+    <!-- Page content-->
+    <div class="container mt-5">
+      <div class="row">
+        <!-- Profile pic form -->
+        <div class="col-md-3">
+          <div class="card">
+            <!-- Card header -->
+            <div class="card-header"><strong>Foto de perfil</strong></div>
+            <!-- Card body -->
+            <div class="card-body text-center">
+              <img
+                src="https://c.tenor.com/Q823-830Ri0AAAAd/christian-bale-american-psycho.gif"
+                class="avatar rounded-circle"
+                width="200"
+                height="200"
+                alt="avatar"
+              />
+            </div>
+            <!-- Card footer -->
+            <div class="card-footer text-center">
+              <form
+                action="#"
+                method="post"
+                enctype="multipart/form-data"
+                class=""
+              >
+                <input type="file" name="file" class="form-control btn" />
+                <button type="submit" class="btn btn-success" name="submit">
+                  Enviar foto
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- Profile info form -->
+        <div class="col-md-9">
+          <div class="card">
+            <!-- Card header -->
+            <div class="card-header">Suas informações</div>
+
+            <!-- Card body -->
+            <div class="card-body">
+              <!-- Form with all user data -->
+              <form action="#" method="get">
+                <!-- User name -->
+                <div class="form-group">
+                  <label class="col-lg-3 control-label">Usuário:</label>
+                  <div class="col-lg-8">
+                    <input
+                      class="form-control"
+                      type="text"
+                      name="username"
+                      value="Nome da conta do usuário aqui"
+                      disabled
+                      readonly
+                    />
+                  </div>
+                </div>
+
+                <!-- Name -->
+                <div class="form-group">
+                  <label class="col-lg-3 control-label">Nome:</label>
+                  <div class="col-lg-8">
+                    <input
+                      class="form-control"
+                      type="text"
+                      name="nome"
+                      value="Nome do banco aqui"
+                    />
+                  </div>
+                </div>
+
+                <!-- Email -->
+                <div class="form-group">
+                  <label class="col-lg-3 control-label">Email:</label>
+                  <div class="col-lg-8">
+                    <input
+                      class="form-control"
+                      type="text"
+                      name="email"
+                      value="Email do banco aqui"
+                    />
+                  </div>
+                </div>
+              </form>
+            </div>
+
+            <!-- Card footer -->
+            <div class="card-footer pt-3 pb-3">
+              <input
+                type="submit"
+                name="submit-editar"
+                class="btn btn-success"
+                value="Salvar Alterações"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- Fake container -->
+        <div class="col-md-3"></div>
+        <!-- Change password form -->
+        <div class="col-md-9 pt-5">
+          <div class="card">
+            <!-- Card header -->
+            <div class="card-header">Alterar senha</div>
+
+            <!-- Card body -->
+            <div class="card-body">
+              <!-- Form with all user data -->
+              <form action="#" method="get" class="form-horizontal" role="form">
+                <!-- Actual pwd -->
+                <div class="form-group">
+                  <label class="col-lg-3 control-label">Senha atual:</label>
+                  <div class="col-lg-8">
+                    <input class="form-control" type="password" name="pwd" />
+                  </div>
+                </div>
+
+                <!-- New pwd -->
+                <div class="form-group">
+                  <label class="col-lg-3 control-label"
+                    >Nova senha:</label
+                  >
+                  <div class="col-lg-8">
+                    <input class="form-control" type="password" name="pwdC" />
+                  </div>
+                </div>
+
+                <!-- Confirm new pwd -->
+                <div class="form-group">
+                  <label class="col-lg-3 control-label"
+                    >Confirme a nova senha:</label
+                  >
+                  <div class="col-lg-8">
+                    <input class="form-control" type="password" name="pwdC" />
+                  </div>
+                </div>
+              </form>
+            </div>
+
+            <!-- Card footer -->
+            <div class="card-footer pt-3 pb-3">
+              <input
+                type="submit"
+                name="submit-editar"
+                class="btn btn-success"
+                value="Salvar nova senha"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /.container -->
+
+    <!-- Footer -->
+    <div th:replace="includes/footer">
+
+    <!-- Bootstrap core JavaScript -->
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+      integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
