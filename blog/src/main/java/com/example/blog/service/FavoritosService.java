@@ -8,6 +8,8 @@ import java.util.Optional;
 public interface FavoritosService {
     Optional<Favoritos> getFavoritosById(Integer id);
     List<Favoritos> getAllFavoritos();
+    Optional<Integer> getCountOfFavoritosByPostId(Integer id);
+    int getFavoritoByUsuarioAndPost(Integer id_post, Integer id_usuario);
     void deleteAllFavoritos();
     void deleteFavoritosById(Integer id);
     void updateFavoritosById(Integer id, Favoritos favoritos);

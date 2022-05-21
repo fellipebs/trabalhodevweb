@@ -36,11 +36,9 @@
                 <div class="card mb-5">
                   <div class="card-body">
                     <!-- Liked -->
-                    Post já curtido ->  <a href="#"><i class='fas fa-thumbs-up'></i></a> 24 curtidas
-                    <!-- ME DESCULPA XUXU --> <br>
-
+                    <a href="#"><i class='fas fa-star'></i></a> <th:block th:text="${favoritos}"></th:block>   
                     <!-- Not liked -->
-                    Post ainda não curtido  ->   <a href="#"><i class='far fa-thumbs-up'></i></a> 69 curtidas
+                    <!-- <a href="#"><i class='far fa-star'></i></a> -->
                   </div>
                 </div>
 
@@ -50,39 +48,19 @@
                         <div class="card-body">
                             <!-- Comment form-->
                             <form class="mb-4"><textarea class="form-control" rows="3" placeholder="Join the discussion and leave a comment!"></textarea></form>
-                            <!-- Comment with nested comments-->
-                            <div class="d-flex mb-4">
-                                <!-- Parent comment-->
-                                <div class="flex-shrink-0"><img class="rounded-circle mx-auto d-block" style="width: 60px; height: 60px" src="https://c.tenor.com/Q823-830Ri0AAAAd/christian-bale-american-psycho.gif" alt="..." /></div>
-                                <div class="ms-3">
-                                    <div class="fw-bold rainbow">Giugiu ademir</div>
-                                    If you're going to lead a space frontier, it has to be government; it'll never be private enterprise. Because the space frontier is dangerous, and it's expensive, and it has unquantified risks.
-                                    <!-- Child comment 1-->
-                                    <div class="d-flex mt-4">
-                                      <div class="flex-shrink-0"><img class="rounded-circle mx-auto d-block" style="width: 60px; height: 60px" src="https://c.tenor.com/gdehSI5KPfQAAAAd/cats-cat.gif" alt="..." /></div>
-                                        <div class="ms-3">
-                                            <div class="fw-bold">Bitchslayer29</div>
-                                            I disagree
-                                        </div>
-                                    </div>
-                                    <!-- Child comment 2-->
-                                    <div class="d-flex mt-4">
-                                      <div class="flex-shrink-0"><img class="rounded-circle mx-auto d-block" style="width: 60px; height: 60px" src="https://c.tenor.com/Q823-830Ri0AAAAd/christian-bale-american-psycho.gif" alt="..." /></div>
-                                      <div class="ms-3">
-                                          <div class="fw-bold rainbow">Giugiu ademir</div>
-                                          STFU
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Single comment-->
+                           <!-- Single comment-->                            
+                           <div th:each="comentario : ${comentarios}">
                             <div class="d-flex">
                                 <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
                                 <div class="ms-3">
-                                    <div class="fw-bold">Commenter Name</div>
-                                    When I look at the universe and all the ways the universe wants to kill us, I find it hard to reconcile that with statements of beneficence.
+                                    <div 
+                                    th:text="${comentario.usuario.perfilAcesso.tipo}" 
+                                    th:class="${#strings.equals(comentario.usuario.perfilAcesso.tipo, 'Admin')} ? 'fw-bold rainbow' : 'fw-bold'"
+                                    ></div>
+                                    <p th:utext="${comentario.comentario}"></p>
                                 </div>
                             </div>
+                        </div>
                         </div>
                     </div>
                 </section>

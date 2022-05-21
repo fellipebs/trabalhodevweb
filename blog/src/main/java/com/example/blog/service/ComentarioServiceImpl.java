@@ -13,8 +13,12 @@ public class ComentarioServiceImpl implements ComentarioService{
 
     @Autowired
     ComentarioRepository comentarioRepository;
+
     @Override
     public Optional<Comentario> getComentarioById(Integer id){ return comentarioRepository.findById(id);}
+
+    @Override
+    public List<Comentario> getAllComentarioByPostId(Integer id){ return comentarioRepository.getAllComentariosByPostId(id);}
 
     @Override
     public List<Comentario> getAllComentario(){ return comentarioRepository.findAll();}

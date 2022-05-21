@@ -1,6 +1,8 @@
 package com.example.blog.controller;
 
 import com.example.blog.model.Post;
+import com.example.blog.service.ComentarioService;
+import com.example.blog.service.FavoritosService;
 import com.example.blog.service.PostService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,20 +20,35 @@ import javax.validation.Valid;
 public class PostController {
 
     @Autowired
-    PostService postService;    
+    PostService postService;
+
+    @Autowired
+    ComentarioService comentarioService;
+
+    @Autowired
+    FavoritosService favoritosService;
 
     @RequestMapping(value = "/post/{id}", method = RequestMethod.GET)
     public ModelAndView readPost(@PathVariable Integer id) {
         ModelAndView mav = new ModelAndView("readpost");
+
+        // lista o post
         postService.getPostById(id).ifPresent(val -> mav.addObject("post", val));
+        // carrega os comentarios do post
+        mav.addObject("comentarios", comentarioService.getAllComentarioByPostId(id));
+        // carrega a quantidade de favoritos do post
+        favoritosService.getCountOfFavoritosByPostId(id).ifPresent(val -> mav.addObject("favoritos", retornaFavoritoTexto(val)));
+       
         return mav;
     }
 
     @RequestMapping(value = "/post/insert", method = RequestMethod.GET)
-    public ModelAndView insert() { return new ModelAndView("insert", "post", new Post()); }
+    public ModelAndView insert() {
+        return new ModelAndView("insert", "post", new Post());
+    }
 
     @RequestMapping(value = "/post/insert", method = RequestMethod.POST)
-    public String submitInsert(@Valid @ModelAttribute("post")Post post, BindingResult result, ModelMap model) {
+    public String submitInsert(@Valid @ModelAttribute("post") Post post, BindingResult result, ModelMap model) {
         if (result.hasErrors()) {
             return "error";
         }
@@ -45,7 +62,7 @@ public class PostController {
     }
 
     @RequestMapping(value = "/post/update", method = RequestMethod.POST)
-    public String submitUpdate(@Valid @ModelAttribute("post")Post post, BindingResult result, ModelMap model) {
+    public String submitUpdate(@Valid @ModelAttribute("post") Post post, BindingResult result, ModelMap model) {
         if (result.hasErrors()) {
             return "error";
         }
@@ -59,7 +76,7 @@ public class PostController {
     }
 
     @RequestMapping(value = "/post/delete", method = RequestMethod.POST)
-    public String submitDelete(@Valid @ModelAttribute("post")Post post, BindingResult result, ModelMap model) {
+    public String submitDelete(@Valid @ModelAttribute("post") Post post, BindingResult result, ModelMap model) {
         if (result.hasErrors()) {
             return "error";
         }
@@ -68,4 +85,17 @@ public class PostController {
 
     }
 
+    public String retornaFavoritoTexto(Integer qtde){
+        String textoFavoritos = "0 favoritos";
+
+        if(qtde != null){
+            if (qtde == 1) {
+                textoFavoritos = qtde + " favorito";
+            } else if (qtde > 1) {
+                textoFavoritos = qtde + " favoritos";
+            }
+        }
+
+        return textoFavoritos;
+    }
 }

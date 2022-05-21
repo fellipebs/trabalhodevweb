@@ -18,6 +18,10 @@ public class FavoritosServiceImpl implements FavoritosService{
     @Override
     public Optional<Favoritos> getFavoritosById(Integer id){ return favoritosRepository.findById(id);}
 
+    public Optional<Integer> getCountOfFavoritosByPostId(Integer id){ return favoritosRepository.getCountOfFavoritosByPostId(id);}
+
+    public int getFavoritoByUsuarioAndPost(Integer id_post, Integer id_usuario){ return favoritosRepository.getFavoritoByUsuarioAndPost(id_post, id_usuario);}
+
     @Override
     public List<Favoritos> getAllFavoritos() {return favoritosRepository.findAll();}
 
