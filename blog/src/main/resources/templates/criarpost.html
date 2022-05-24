@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="pt-br" xmlns:th="http://www.w3.org/1999/xhtml">
   <head th:replace="includes/header"></head>
+  <head>
+    <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
+  </head>
   <body>
     <!-- NAVBAR -->
     <div th:replace="includes/navbar"></div>
@@ -100,7 +103,7 @@
     <!-- /.container -->
 
     <!-- Footer -->
-    <div th:replace="includes/footer">
+    <div th:replace="includes/footer"></div>
 
     <!-- Ckeditor javascript -->
     <script>
