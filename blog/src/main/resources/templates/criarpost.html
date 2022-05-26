@@ -16,7 +16,7 @@
           <div class="card">
             <!-- Card header -->
             <div class="card-header">Informações do post</div>
-            <form action="#" method="POST" class="pt-2">
+            <form action="/post/save" method="POST" enctype="multipart/form-data" class="pt-2">
               <!-- Card body -->
               <div class="card-body">
 
@@ -39,11 +39,9 @@
                     <div class="col-lg-8">
                       <select class="form-control" name="categoria">
                         <option selected>Selecione uma categoria</option>
-                        <option>Tema 1</option>
-                        <option>Tema 2</option>
-                        <option>Tema 3</option>
-                        <option>Tema 4</option>
-                        <option>Tema 5</option>
+                        <option th:each="categoria : ${allCategorias}"
+                                th:value="${categoria.idCategoria}"
+                                th:text="${categoria.nome}">
                       </select>
                     </div>
                   </div>
@@ -51,17 +49,13 @@
                   <!-- Textarea for post content using ck editor -->
                   <div class="form-group">
                     <label>Digite o conteúdo do seu post:</label>
-                    <textarea
-                      class="form-control"
-                      name="conteudo"
-                      id="textarea"
-                    ></textarea>
+                    <textarea class="form-control" name="conteudo" id="textarea"></textarea>
                   </div>
 
                   <!-- Post photo container -->
                   <div class="form-group">
                     <label class="mb-3">Foto do post:</label></br>
-                    <input type="file" name="image" accept="image/png, image/jpeg" />
+                    <input type="file" name="imageFile" accept="image/png, image/jpeg" />
 
                     <!-- Card footer -->
                     <div class="mt-3">

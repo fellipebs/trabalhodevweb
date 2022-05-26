@@ -40,7 +40,7 @@
               <div class="card-footer pb-2 pt-2">
                 <a href='#' class="btn btn-danger">Apagar &rarr;</a>
                 <a href='#' class="btn btn-warning">Editar &rarr;</a>
-                <a href='#' class="btn btn-primary">Ler &rarr;</a>
+                <a th:href="@{'/post/' + ${post.idPost}}" class="btn btn-primary">Ler &rarr;</a>
               </div>
             </article> 
           </div>

@@ -25,8 +25,10 @@ public class Controller {
     }
 
     @RequestMapping(value = "/criarpost", method = RequestMethod.GET)
-    public String criarPost() {
-        return "criarpost";
+    public ModelAndView criarPost() {
+        ModelAndView mav = new ModelAndView("criarpost");
+        mav.addObject("allCategorias", categoriaService.getAllCategoria());
+        return mav;
     }
 
     @RequestMapping(value = "/readpost", method = RequestMethod.GET)

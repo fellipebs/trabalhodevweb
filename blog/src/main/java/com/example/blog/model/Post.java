@@ -15,8 +15,11 @@ public class Post {
 
     private int idPost;
     private String titulo;
+
+    @Column(nullable = true, length = 64)
+    private String foto;
     
-    @Column(columnDefinition="TEXT")
+    @Column(nullable = true, columnDefinition="TEXT")
     private String conteudo;
 
     public Post(int id_post, String titulo_post, String conteudo_post, Categoria categoria, Usuario usuario) {
@@ -54,6 +57,14 @@ public class Post {
 
     public void setTitulo(String titulo) {
         this.titulo = titulo;
+    }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
     }
 
     public String getConteudo() {
