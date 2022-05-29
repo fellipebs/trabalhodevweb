@@ -50,22 +50,7 @@
             <!-- Card body -->
             <div class="card-body">
               <!-- Form with all user data -->
-              <form action="#" method="get">
-                <!-- User name -->
-                <div class="form-group">
-                  <label class="col-lg-3 control-label">Usuário:</label>
-                  <div class="col-lg-8">
-                    <input
-                      class="form-control"
-                      type="text"
-                      name="username"
-                      value="Nome da conta do usuário aqui"
-                      disabled
-                      readonly
-                    />
-                  </div>
-                </div>
-
+              <form action="/usuario/update" method="post">
                 <!-- Name -->
                 <div class="form-group">
                   <label class="col-lg-3 control-label">Nome:</label>
@@ -74,7 +59,7 @@
                       class="form-control"
                       type="text"
                       name="nome"
-                      value="Nome do banco aqui"
+                      th:value="${info_usuario.nome}"
                     />
                   </div>
                 </div>
@@ -87,78 +72,45 @@
                       class="form-control"
                       type="text"
                       name="email"
-                      value="Email do banco aqui"
+                      th:value="${info_usuario.email}"
                     />
                   </div>
                 </div>
-              </form>
-            </div>
 
-            <!-- Card footer -->
-            <div class="card-footer pt-3 pb-3">
-              <input
-                type="submit"
-                name="submit-editar"
-                class="btn btn-success"
-                value="Salvar Alterações"
-              />
-            </div>
-          </div>
-        </div>
-
-        <!-- Fake container -->
-        <div class="col-md-3"></div>
-        <!-- Change password form -->
-        <div class="col-md-9 pt-5">
-          <div class="card">
-            <!-- Card header -->
-            <div class="card-header">Alterar senha</div>
-
-            <!-- Card body -->
-            <div class="card-body">
-              <!-- Form with all user data -->
-              <form action="#" method="get" class="form-horizontal" role="form">
-                <!-- Actual pwd -->
+                <!-- Biografy -->
                 <div class="form-group">
-                  <label class="col-lg-3 control-label">Senha atual:</label>
+                  <label class="col-lg-3 control-label">Biografia:</label>
                   <div class="col-lg-8">
-                    <input class="form-control" type="password" name="pwd" />
+                    <textarea class="form-control"
+                              name="biografia"
+                              cols="30" 
+                              rows="5" 
+                              th:text="${info_usuario.biografia}">
+                    </textarea>
                   </div>
                 </div>
 
                 <!-- New pwd -->
                 <div class="form-group">
-                  <label class="col-lg-3 control-label"
-                    >Nova senha:</label
-                  >
+                  <label class="col-lg-3 control-label">Nova senha:</label>
                   <div class="col-lg-8">
-                    <input class="form-control" type="password" name="pwdC" />
+                    <input class="form-control" type="password" name="senha"/>
                   </div>
                 </div>
+                
 
-                <!-- Confirm new pwd -->
-                <div class="form-group">
-                  <label class="col-lg-3 control-label"
-                    >Confirme a nova senha:</label
-                  >
-                  <div class="col-lg-8">
-                    <input class="form-control" type="password" name="pwdC" />
-                  </div>
-                </div>
+              <!-- Card footer -->
+              <div class="card-footer pt-3 pb-3">
+                <input
+                  type="submit"
+                  class="btn btn-success"
+                  value="Salvar Alterações"
+                />
+              </div>
               </form>
-            </div>
-
-            <!-- Card footer -->
-            <div class="card-footer pt-3 pb-3">
-              <input
-                type="submit"
-                name="submit-editar"
-                class="btn btn-success"
-                value="Salvar nova senha"
-              />
-            </div>
           </div>
         </div>
+
       </div>
     </div>
     <!-- /.container -->

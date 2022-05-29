@@ -21,14 +21,13 @@
                </li>
 
                <!-- EXCLUSIVO PARA ADMINS E AUTORES -->
-               <li class="nav-item">
-                  <a class="nav-link" href="/criarpost">Novo Post</a>
+               <li class="nav-item" th:if="${info_usuario != null && info_usuario.perfilAcesso.tipo != null}">
+                  <a class="nav-link" href="/criarpost" th:if="${info_usuario.perfilAcesso.tipo == 'Autor' || info_usuario.perfilAcesso.tipo == 'Admin'}">Novo Post</a>
                </li>
 
                <!-- PARA USUÁRIOS DESLOGADOS -->
-               <li class="nav-item dropdown">
-                  <a
-                          class="nav-link dropdown-toggle"
+               <li class="nav-item dropdown" th:if="${info_usuario == null}">
+                  <a class="nav-link dropdown-toggle"
                           href="#"
                           id="navbarDropdownMenuLink"
                           data-toggle="dropdown"
@@ -47,16 +46,16 @@
                </li>
 
                <!-- PARA USUÁRIOS LOGADOS -->
-               <li class="nav-item dropdown">
-                  <a
-                          class="nav-link dropdown-toggle"
+               <li class="nav-item dropdown" th:if="${info_usuario != null}">
+                  <a       class="nav-link dropdown-toggle"
                           href="#"
                           id="navbarDropdownMenuLink"
                           data-toggle="dropdown"
                           aria-haspopup="true"
                           aria-expanded="false"
+                          th:if="${info_usuario != null && info_usuario.nome != null}"
+                          th:text="${'Olá, ' + info_usuario.nome}"
                   >
-                     Olá, USUÁRIO
                   </a>
                   <div
                           class="dropdown-menu"

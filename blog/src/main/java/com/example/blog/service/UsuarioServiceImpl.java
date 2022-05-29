@@ -14,6 +14,10 @@ public class UsuarioServiceImpl implements UsuarioService{
     @Autowired
     UsuarioRepository usuarioRepository;
 
+    public Usuario findByEmailAndSenha(String email, String senha){
+        return usuarioRepository.findByEmailAndSenha(email, senha);
+    }
+
     @Override
     public Optional<Usuario> getUsuarioById(Integer id){ return usuarioRepository.findById(id);}
 

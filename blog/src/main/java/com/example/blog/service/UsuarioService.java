@@ -7,6 +7,8 @@ import java.util.Optional;
 
 public interface UsuarioService {
 
+    Usuario findByEmailAndSenha(String email, String senha);
+
     Optional<Usuario> getUsuarioById(Integer id);
 
     List<Usuario> getAllUsuario();

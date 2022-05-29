@@ -42,11 +42,11 @@ public class BlogApplication {
 		PerfilAcesso admin = new PerfilAcesso(1, "Admin");
 		
 		return args -> {
-			repo.save(new Usuario(1, "Giugiu ademir", "giu@bloggersin.com", "senha123", "foto.png", "lorem ipsum ai que dor", admin));
-			repo.save(new Usuario(2, "Gustavin", "gustavin@bloggersin.com", "senha123", "foto.png", "lorem ipsum ai que dor", admin));
-			repo.save(new Usuario(3, "Gustavo", "gustavo@bloggersin.com", "senha123", "foto.png", "lorem ipsum ai que dor", admin));
-			repo.save(new Usuario(4, "Fellipe", "fellipe@bloggersin.com", "senha123", "foto.png", "lorem ipsum ai que dor", admin));
-			repo.save(new Usuario(5, "Kael", "mikael@bloggersin.com", "senha123", "foto.png", "lorem ipsum ai que dor", admin));
+			repo.save(new Usuario(1, "Giugiu ademir", "giu@bloggersin.com", "senha123", "default.png", "lorem ipsum ai que dor", admin));
+			repo.save(new Usuario(2, "Gustavin", "gustavin@bloggersin.com", "senha123", "default.png", "lorem ipsum ai que dor", admin));
+			repo.save(new Usuario(3, "Gustavo", "gustavo@bloggersin.com", "senha123", "default.png", "lorem ipsum ai que dor", admin));
+			repo.save(new Usuario(4, "Fellipe", "fellipe@bloggersin.com", "senha123", "default.png", "lorem ipsum ai que dor", admin));
+			repo.save(new Usuario(5, "Kael", "mikael@bloggersin.com", "senha123", "default.png", "lorem ipsum ai que dor", admin));
 		};
 	}
 
@@ -66,9 +66,9 @@ public class BlogApplication {
 		
 		PerfilAcesso admin = new PerfilAcesso(1, "Admin");
 		
-		Usuario giu = new Usuario(1, "Giugiu ademir", "giu@bloggersin.com", "senha123", "foto.png", "lorem ipsum ai que dor", admin);
-		Usuario gustavin = new Usuario(2, "Gustavin", "gustavin@bloggersin.com", "senha123", "foto.png", "lorem ipsum ai que dor", admin);
-		Usuario kael = new Usuario(5, "Kael", "mikael@bloggersin.com", "senha123", "foto.png", "lorem ipsum ai que dor", admin);
+		Usuario giu = new Usuario(1, "Giugiu ademir", "giu@bloggersin.com", "senha123", "default.png", "lorem ipsum ai que dor", admin);
+		Usuario gustavin = new Usuario(2, "Gustavin", "gustavin@bloggersin.com", "senha123", "default.png", "lorem ipsum ai que dor", admin);
+		Usuario kael = new Usuario(5, "Kael", "mikael@bloggersin.com", "senha123", "default.png", "lorem ipsum ai que dor", admin);
 
 		Categoria tecnologia = new Categoria(1, "Tecnologia");
 		Categoria automatos = new Categoria(2, "Automatos");
@@ -88,11 +88,11 @@ public class BlogApplication {
 
 		PerfilAcesso admin = new PerfilAcesso(1, "Admin");
 		
-		Usuario giu = new Usuario(1, "Giugiu ademir", "giu@bloggersin.com", "senha123", "foto.png", "lorem ipsum ai que dor", admin);
-		Usuario fellipe = new Usuario(3, "Gustavo", "gustavo@bloggersin.com", "senha123", "foto.png", "lorem ipsum ai que dor", admin);
-		Usuario gustavo = new Usuario(4, "Fellipe", "fellipe@bloggersin.com", "senha123", "foto.png", "lorem ipsum ai que dor", admin);
-		Usuario gustavin = new Usuario(2, "Gustavin", "gustavin@bloggersin.com", "senha123", "foto.png", "lorem ipsum ai que dor", admin);
-		Usuario kael = new Usuario(5, "Kael", "mikael@bloggersin.com", "senha123", "foto.png", "lorem ipsum ai que dor", admin);
+		Usuario giu = new Usuario(1, "Giugiu ademir", "giu@bloggersin.com", "senha123", "default.png", "lorem ipsum ai que dor", admin);
+		Usuario fellipe = new Usuario(3, "Gustavo", "gustavo@bloggersin.com", "senha123", "default.png", "lorem ipsum ai que dor", admin);
+		Usuario gustavo = new Usuario(4, "Fellipe", "fellipe@bloggersin.com", "senha123", "default.png", "lorem ipsum ai que dor", admin);
+		Usuario gustavin = new Usuario(2, "Gustavin", "gustavin@bloggersin.com", "senha123", "default.png", "lorem ipsum ai que dor", admin);
+		Usuario kael = new Usuario(5, "Kael", "mikael@bloggersin.com", "senha123", "default.png", "lorem ipsum ai que dor", admin);
 
 		Categoria tecnologia = new Categoria(1, "Tecnologia");
 		Categoria automatos = new Categoria(2, "Automatos");
@@ -121,11 +121,11 @@ public class BlogApplication {
 
 		PerfilAcesso admin = new PerfilAcesso(1, "Admin");
 		
-		Usuario giu = new Usuario(1, "Giugiu ademir", "giu@bloggersin.com", "senha123", "foto.png", "lorem ipsum ai que dor", admin);
-		// Usuario fellipe = new Usuario(3, "Gustavo", "gustavo@bloggersin.com", "senha123", "foto.png", "lorem ipsum ai que dor", admin);
-		// Usuario gustavo = new Usuario(4, "Fellipe", "fellipe@bloggersin.com", "senha123", "foto.png", "lorem ipsum ai que dor", admin);
-		Usuario gustavin = new Usuario(2, "Gustavin", "gustavin@bloggersin.com", "senha123", "foto.png", "lorem ipsum ai que dor", admin);
-		Usuario kael = new Usuario(5, "Kael", "mikael@bloggersin.com", "senha123", "foto.png", "lorem ipsum ai que dor", admin);
+		Usuario giu = new Usuario(1, "Giugiu ademir", "giu@bloggersin.com", "senha123", "default.png", "lorem ipsum ai que dor", admin);
+		// Usuario fellipe = new Usuario(3, "Gustavo", "gustavo@bloggersin.com", "senha123", "default.png", "lorem ipsum ai que dor", admin);
+		// Usuario gustavo = new Usuario(4, "Fellipe", "fellipe@bloggersin.com", "senha123", "default.png", "lorem ipsum ai que dor", admin);
+		Usuario gustavin = new Usuario(2, "Gustavin", "gustavin@bloggersin.com", "senha123", "default.png", "lorem ipsum ai que dor", admin);
+		Usuario kael = new Usuario(5, "Kael", "mikael@bloggersin.com", "senha123", "default.png", "lorem ipsum ai que dor", admin);
 
 		Categoria tecnologia = new Categoria(1, "Tecnologia");
 		Categoria automatos = new Categoria(2, "Automatos");

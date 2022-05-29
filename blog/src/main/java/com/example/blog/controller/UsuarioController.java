@@ -1,7 +1,11 @@
 package com.example.blog.controller;
 
+import javax.validation.Valid;
+
+import com.example.blog.model.PerfilAcesso;
 import com.example.blog.model.Usuario;
 import com.example.blog.service.UsuarioService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -9,8 +13,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
-import javax.validation.Valid;
+import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
 public class UsuarioController {
@@ -35,6 +40,11 @@ public class UsuarioController {
         if (result.hasErrors()) {
             return "error";
         }
+        
+        usuario.setFoto("default.png");
+        usuario.setPerfilAcesso(new PerfilAcesso(3, "Usuário"));
+        usuario.setBiografia("Hello World!");
+
         usuarioService.insertUsuario(usuario);
         return "redirect:";
     }
@@ -45,12 +55,29 @@ public class UsuarioController {
     }
 
     @RequestMapping(value = "/usuario/update", method = RequestMethod.POST)
-    public String submitUpdate(@Valid @ModelAttribute("usuario") Usuario usuario, BindingResult result, ModelMap model) {
+    public RedirectView submitUpdate(@SessionAttribute(name = "usuarioAtual", required = false) Usuario usuarioAtual, @Valid @ModelAttribute("usuario") Usuario usuario, BindingResult result, ModelMap model) {
         if (result.hasErrors()) {
-            return "error";
+            return new RedirectView("/editarperfil", true);
         }
+
+        if(usuario.getSenha() == "" || usuario.getSenha() == null){
+            usuario.setSenha(usuarioAtual.getSenha());
+        }
+
+        usuario.setIdUsuario(usuarioAtual.getIdUsuario());
+        usuario.setPerfilAcesso(usuarioAtual.getPerfilAcesso());
+        usuario.setFoto(usuarioAtual.getFoto());
+
         usuarioService.updateUsuario(usuario);
-        return "redirect:";
+
+        // Atualiza o valor da sessão atual
+        usuarioAtual.setBiografia(usuario.getBiografia());
+        usuarioAtual.setNome(usuario.getNome());
+        usuarioAtual.setEmail(usuario.getEmail());
+        usuarioAtual.setFoto(usuario.getFoto());
+        usuarioAtual.setSenha(usuario.getSenha());
+
+        return new RedirectView("/", true);
     }
 
     @RequestMapping(value = "/usuario/delete", method = RequestMethod.GET)
@@ -59,7 +86,8 @@ public class UsuarioController {
     }
 
     @RequestMapping(value = "/usuario/delete", method = RequestMethod.POST)
-    public String submitDelete(@Valid @ModelAttribute("usuario") Usuario usuario, BindingResult result, ModelMap model) {
+    public String submitDelete(@Valid @ModelAttribute("usuario") Usuario usuario, BindingResult result,
+            ModelMap model) {
         if (result.hasErrors()) {
             return "error";
         }
