@@ -121,6 +121,25 @@ public class PostController {
         return new RedirectView("/post/update?id=" + id);
     }
 
+    @RequestMapping(value = "/post/foto/update", method = RequestMethod.POST)
+    public RedirectView updatePostPhoto(Integer id, @RequestParam("imageFile") MultipartFile imageFile) throws IOException {
+
+        String fileName = imageFile.getOriginalFilename();
+        String extension = fileName.substring(fileName.lastIndexOf(".") + 1);
+        String newFileName = UUID.randomUUID() + "." + extension;
+
+        Post postAntigo = postService.getPostById(id).get(); 
+        postAntigo.setFoto(newFileName);
+
+        postService.updatePost(postAntigo);
+
+        String uploadDir = "post-fotos/";
+        
+        FileUploadUtil.saveFile(uploadDir, newFileName, imageFile);
+
+        return new RedirectView("/post/update?id=" + id);
+    }
+
     @RequestMapping(value = "/post/delete", method = RequestMethod.GET)
     public ModelAndView delete(Integer id) {
         return new ModelAndView("delete", "post", postService.getPostById(id).get());
