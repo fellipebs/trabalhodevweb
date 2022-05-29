@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 @org.springframework.stereotype.Controller
 @SessionAttributes("usuarioAtual")
@@ -71,7 +72,20 @@ public class LoginController {
 
         ModelAndView mav = new ModelAndView("editarperfil");
         mav.addObject("info_usuario", usuarioAtual);
-         return mav;
+        return mav;
+    }
+
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public RedirectView logout(@SessionAttribute(name = "usuarioAtual", required = false) Usuario usuarioAtual) {
+        usuarioAtual.setBiografia(null);
+        usuarioAtual.setEmail(null);
+        usuarioAtual.setFoto("default.png");
+        usuarioAtual.setIdUsuario(0);
+        usuarioAtual.setNome(null);
+        usuarioAtual.setPerfilAcesso(null);
+        usuarioAtual.setIdUsuario(0);
+
+        return new RedirectView("/", true);
     }
 
 }

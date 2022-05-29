@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.io.IOException;
+import java.util.UUID;
 
 import javax.validation.Valid;
 
@@ -57,14 +58,14 @@ public class PostController {
 
         String fileName = imageFile.getOriginalFilename();
         String extension = fileName.substring(fileName.lastIndexOf(".") + 1);
-        String newFileName = "post-foto-" + post.getIdPost() + "." + extension;
+        String newFileName = UUID.randomUUID() + "." + extension;
 
         post.setFoto(newFileName);
         post.setUsuario(usuarioAtual);
 
         postService.insertPost(post); 
 
-        String uploadDir = "src/main/resources/static/post-fotos/";
+        String uploadDir = "post-fotos/";
  
         FileUploadUtil.saveFile(uploadDir, newFileName, imageFile);
          
