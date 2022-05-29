@@ -31,23 +31,4 @@ public class Controller {
         return mav;
     }
 
-    @RequestMapping(value = "/criarpost", method = RequestMethod.GET)
-    public ModelAndView criarPost(@SessionAttribute(name = "usuarioAtual", required = false) Usuario usuarioAtual) {        
-        if (usuarioAtual == null || usuarioAtual.getPerfilAcesso() == null) {
-            return new ModelAndView("redirect:");
-        }
-
-        ModelAndView mav = new ModelAndView("criarpost");
-
-        mav.addObject("allCategorias", categoriaService.getAllCategoria());
-        mav.addObject("info_usuario", usuarioAtual != null && usuarioAtual.getNome() != null ? usuarioAtual : null);
-
-        return mav;
-    }
-
-    @RequestMapping(value = "/editarpost", method = RequestMethod.GET)
-    public String editarPost() {
-        return "editarpost";
-    }
-
 }

@@ -1,7 +1,13 @@
 package com.example.blog.controller;
 
+import java.io.IOException;
+import java.util.UUID;
+
+import javax.validation.Valid;
+
 import com.example.blog.model.Post;
 import com.example.blog.model.Usuario;
+import com.example.blog.service.CategoriaService;
 import com.example.blog.service.ComentarioService;
 import com.example.blog.service.FavoritosService;
 import com.example.blog.service.PostService;
@@ -21,11 +27,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
-import java.io.IOException;
-import java.util.UUID;
-
-import javax.validation.Valid;
-
 @Controller
 public class PostController {
 
@@ -38,8 +39,12 @@ public class PostController {
     @Autowired
     FavoritosService favoritosService;
 
+    @Autowired
+    CategoriaService categoriaService;
+
     @RequestMapping(value = "/post/{id}", method = RequestMethod.GET)
-    public ModelAndView readPost(@SessionAttribute(name = "usuarioAtual", required = false) Usuario usuarioAtual, @PathVariable Integer id) {
+    public ModelAndView readPost(@SessionAttribute(name = "usuarioAtual", required = false) Usuario usuarioAtual,
+            @PathVariable Integer id) {
         ModelAndView mav = new ModelAndView("readpost");
 
         // lista o post
@@ -47,14 +52,16 @@ public class PostController {
         // carrega os comentarios do post
         mav.addObject("comentarios", comentarioService.getAllComentarioByPostId(id));
         // carrega a quantidade de favoritos do post
-        favoritosService.getCountOfFavoritosByPostId(id).ifPresent(val -> mav.addObject("favoritos", retornaFavoritoTexto(val)));
+        favoritosService.getCountOfFavoritosByPostId(id)
+                .ifPresent(val -> mav.addObject("favoritos", retornaFavoritoTexto(val)));
         mav.addObject("info_usuario", usuarioAtual != null && usuarioAtual.getNome() != null ? usuarioAtual : null);
-       
+
         return mav;
     }
 
     @PostMapping("/post/insert")
-    public RedirectView savePost(@SessionAttribute(name = "usuarioAtual", required = false) Usuario usuarioAtual, @ModelAttribute("post")Post post, @RequestParam("imageFile") MultipartFile imageFile) throws IOException{
+    public RedirectView savePost(@SessionAttribute(name = "usuarioAtual", required = false) Usuario usuarioAtual,
+            @ModelAttribute("post") Post post, @RequestParam("imageFile") MultipartFile imageFile) throws IOException {
 
         String fileName = imageFile.getOriginalFilename();
         String extension = fileName.substring(fileName.lastIndexOf(".") + 1);
@@ -63,32 +70,55 @@ public class PostController {
         post.setFoto(newFileName);
         post.setUsuario(usuarioAtual);
 
-        postService.insertPost(post); 
+        postService.insertPost(post);
 
         String uploadDir = "post-fotos/";
- 
+
         FileUploadUtil.saveFile(uploadDir, newFileName, imageFile);
-         
+
         return new RedirectView("/", true);
     }
 
     @RequestMapping(value = "/post/insert", method = RequestMethod.GET)
-    public ModelAndView insert() {
-        return new ModelAndView("insert", "post", new Post());
+    public ModelAndView insert(@SessionAttribute(name = "usuarioAtual", required = false) Usuario usuarioAtual) {
+        if (usuarioAtual == null || usuarioAtual.getPerfilAcesso() == null) {
+            return new ModelAndView("redirect:");
+        }
+
+        ModelAndView mav = new ModelAndView("criarpost");
+
+        mav.addObject("allCategorias", categoriaService.getAllCategoria());
+        mav.addObject("info_usuario", usuarioAtual != null && usuarioAtual.getNome() != null ? usuarioAtual : null);
+
+        return mav;
     }
 
     @RequestMapping(value = "/post/update", method = RequestMethod.GET)
-    public ModelAndView update(Integer id) {
-        return new ModelAndView("update", "post", postService.getPostById(id).get());
+    public ModelAndView update(Integer id,
+            @SessionAttribute(name = "usuarioAtual", required = false) Usuario usuarioAtual) {
+        ModelAndView mav = new ModelAndView("editarpost");
+
+        mav.addObject("allCategorias", categoriaService.getAllCategoria());
+        mav.addObject("post", postService.getPostById(id).get());
+        mav.addObject("info_usuario", usuarioAtual != null && usuarioAtual.getNome() != null ? usuarioAtual : null);
+
+        return mav;
     }
 
     @RequestMapping(value = "/post/update", method = RequestMethod.POST)
-    public String submitUpdate(@Valid @ModelAttribute("post") Post post, BindingResult result, ModelMap model) {
+    public RedirectView submitUpdate(Integer id, @Valid @ModelAttribute("post") Post post, BindingResult result, ModelMap model) {
         if (result.hasErrors()) {
-            return "error";
+            return new RedirectView("/post/update?id=" + id);
         }
+
+        Post postAntigo = postService.getPostById(id).get();
+
+        post.setIdPost(id);
+        post.setFoto(postAntigo.getFoto());
+        post.setUsuario(postAntigo.getUsuario());    
+
         postService.updatePost(post);
-        return "redirect:";
+        return new RedirectView("/post/update?id=" + id);
     }
 
     @RequestMapping(value = "/post/delete", method = RequestMethod.GET)
@@ -106,10 +136,10 @@ public class PostController {
 
     }
 
-    public String retornaFavoritoTexto(Integer qtde){
+    public String retornaFavoritoTexto(Integer qtde) {
         String textoFavoritos = "0 favoritos";
 
-        if(qtde != null){
+        if (qtde != null) {
             if (qtde == 1) {
                 textoFavoritos = qtde + " favorito";
             } else if (qtde > 1) {
