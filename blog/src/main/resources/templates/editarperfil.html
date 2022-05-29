@@ -16,8 +16,7 @@
             <div class="card-header"><strong>Foto de perfil</strong></div>
             <!-- Card body -->
             <div class="card-body text-center">
-              <img
-                src="https://c.tenor.com/Q823-830Ri0AAAAd/christian-bale-american-psycho.gif"
+              <img th:src="@{${'../usuario-fotos/' + info_usuario.foto}}"
                 class="avatar rounded-circle"
                 width="200"
                 height="200"
@@ -26,13 +25,8 @@
             </div>
             <!-- Card footer -->
             <div class="card-footer text-center">
-              <form
-                action="#"
-                method="post"
-                enctype="multipart/form-data"
-                class=""
-              >
-                <input type="file" name="file" class="form-control btn" />
+              <form action="/usuario/foto/update" method="post" enctype="multipart/form-data">
+                <input type="file" name="imageFile" class="form-control btn" />
                 <button type="submit" class="btn btn-success" name="submit">
                   Enviar foto
                 </button>

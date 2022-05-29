@@ -1,5 +1,8 @@
 package com.example.blog.controller;
 
+import java.io.IOException;
+import java.util.UUID;
+
 import javax.validation.Valid;
 
 import com.example.blog.model.PerfilAcesso;
@@ -11,9 +14,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -86,13 +92,31 @@ public class UsuarioController {
     }
 
     @RequestMapping(value = "/usuario/delete", method = RequestMethod.POST)
-    public String submitDelete(@Valid @ModelAttribute("usuario") Usuario usuario, BindingResult result,
-            ModelMap model) {
+    public String submitDelete(@Valid @ModelAttribute("usuario") Usuario usuario, BindingResult result, ModelMap model) {
+        
         if (result.hasErrors()) {
             return "error";
         }
         usuarioService.deleteUsuarioById(usuario.getIdUsuario());
         return "redirect:";
 
+    }
+
+    @PostMapping("/usuario/foto/update")
+    public RedirectView savePost(@SessionAttribute(name = "usuarioAtual", required = false) Usuario usuarioAtual, @RequestParam("imageFile") MultipartFile imageFile) throws IOException{
+
+        String fileName = imageFile.getOriginalFilename();
+        String extension = fileName.substring(fileName.lastIndexOf(".") + 1);
+        String newFileName = UUID.randomUUID() + "." + extension;
+
+        usuarioAtual.setFoto(newFileName);
+
+        usuarioService.updateUsuario(usuarioAtual); 
+
+        String uploadDir = "usuario-fotos/";
+ 
+        FileUploadUtil.saveFile(uploadDir, newFileName, imageFile);
+         
+        return new RedirectView("/", true);
     }
 }

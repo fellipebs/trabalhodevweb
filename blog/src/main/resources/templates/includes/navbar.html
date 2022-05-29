@@ -1,81 +1,89 @@
 <div th:fragment="navbar">
-   <div class="container mb-5 pb-5">
-      <nav class="navbar navbar-expand-lg navbar-light bg-dark fixed-top" id="mainNav">
-         <a class="navbar-brand" href="/">BLOG CK</a>
-         <button
-                 class="navbar-toggler"
-                 type="button"
-                 data-toggle="collapse"
-                 data-target="#navbarNavDropdown"
-                 aria-controls="navbarNavDropdown"
-                 aria-expanded="false"
-                 aria-label="Toggle navigation"
-         >
-            <span class="navbar-toggler-icon"></span>
-         </button>
-         <div class="collapse navbar-collapse w-100 justify-content-center" id="navbarNavDropdown">
-            <ul class="navbar-nav d-flex flex-row align-items-center">
-               <!-- PARA TODOS -->
-               <li class="nav-item active">
-                  <a class="nav-link" href="/">Home </a>
-               </li>
+  <div class="container mb-5 pb-5">
+    <nav
+      class="navbar navbar-expand-lg navbar-light bg-dark fixed-top"
+      id="mainNav"
+    >
+      <a class="navbar-brand" href="/">BLOG CK</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNavDropdown"
+        aria-controls="navbarNavDropdown"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div
+        class="collapse navbar-collapse w-100 justify-content-center"
+        id="navbarNavDropdown"
+      >
+        <ul class="navbar-nav d-flex flex-row align-items-center">
+          <!-- PARA TODOS -->
+          <li class="nav-item active">
+            <a class="nav-link" href="/">Home </a>
+          </li>
 
-               <!-- EXCLUSIVO PARA ADMINS E AUTORES -->
-               <li class="nav-item" th:if="${info_usuario != null && info_usuario.perfilAcesso.tipo != null}">
-                  <a class="nav-link" href="/criarpost" th:if="${info_usuario.perfilAcesso.tipo == 'Autor' || info_usuario.perfilAcesso.tipo == 'Admin'}">Novo Post</a>
-               </li>
+          <!-- EXCLUSIVO PARA ADMINS E AUTORES -->
+          <li
+            class="nav-item"
+            th:if="${info_usuario != null && info_usuario.perfilAcesso.tipo != null}"
+          >
+            <a
+              class="nav-link"
+              href="/criarpost"
+              th:if="${info_usuario.perfilAcesso.tipo == 'Autor' || info_usuario.perfilAcesso.tipo == 'Admin'}"
+              >Novo Post</a
+            >
+          </li>
 
-               <!-- PARA USUÁRIOS DESLOGADOS -->
-               <li class="nav-item dropdown" th:if="${info_usuario == null}">
-                  <a class="nav-link dropdown-toggle"
-                          href="#"
-                          id="navbarDropdownMenuLink"
-                          data-toggle="dropdown"
-                          aria-haspopup="true"
-                          aria-expanded="false"
-                  >
-                     Olá, Faça login ou cadastro
-                  </a>
-                  <div
-                          class="dropdown-menu"
-                          aria-labelledby="navbarDropdownMenuLink"
-                  >
-                     <a class="dropdown-item" href="/login">Login</a>
-                     <a class="dropdown-item" href="/cadastrar">Cadastrar</a>
-                  </div>
-               </li>
+          <!-- PARA USUÁRIOS DESLOGADOS -->
+          <li class="nav-item dropdown" th:if="${info_usuario == null}">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="navbarDropdownMenuLink"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              Olá, Faça login ou cadastro
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" href="/login">Login</a>
+              <a class="dropdown-item" href="/cadastrar">Cadastrar</a>
+            </div>
+          </li>
 
-               <!-- PARA USUÁRIOS LOGADOS -->
-               <li class="nav-item dropdown" th:if="${info_usuario != null}">
-                  <a       class="nav-link dropdown-toggle"
-                          href="#"
-                          id="navbarDropdownMenuLink"
-                          data-toggle="dropdown"
-                          aria-haspopup="true"
-                          aria-expanded="false"
-                          th:if="${info_usuario != null && info_usuario.nome != null}"
-                          th:text="${'Olá, ' + info_usuario.nome}"
-                  >
-                  </a>
-                  <div
-                          class="dropdown-menu"
-                          aria-labelledby="navbarDropdownMenuLink"
-                  >
-                     <a class="dropdown-item" href="/editarperfil">Editar perfil</a>
-                     <a class="dropdown-item" href="/logout">Sair</a>
-                  </div>
-               </li>
-               <li class="nav-item">
-                  <img
-                          src="https://picsum.photos/200/300"
-                          class="rounded-circle mx-auto d-block"
-                          alt="Foto de Perfil"
-                          style="width: 50px; height: 50px"
-                          ;
-                  />
-               </li>
-            </ul>
-         </div>
-      </nav>
-   </div>
+          <!-- PARA USUÁRIOS LOGADOS -->
+          <li class="nav-item dropdown" th:if="${info_usuario != null}">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="navbarDropdownMenuLink"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+              th:if="${info_usuario != null && info_usuario.nome != null}"
+              th:text="${'Olá, ' + info_usuario.nome}"
+            >
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" href="/editarperfil">Editar perfil</a>
+              <a class="dropdown-item" href="/logout">Sair</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <img th:src="@{${info_usuario != null && info_usuario.foto != null ? '/usuario-fotos/' + info_usuario.foto : '/usuario-fotos/default.png' }}"
+                 class="rounded-circle mx-auto d-block"
+                 alt="Foto de Perfil"
+                 style="width: 50px; height: 50px;"
+            />
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
 </div>
