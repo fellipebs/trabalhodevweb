@@ -32,8 +32,11 @@
               </div>
   
               <!-- Post footer -->
-              <div class="card-footer pb-2 pt-2">
-                <a th:href="@{/post/delete(id=${post.idPost})}" class="btn btn-danger" th:if="${info_usuario != null && info_usuario.perfilAcesso.tipo != null && info_usuario.perfilAcesso.tipo == 'Admin'}">Apagar &rarr;</a>
+              <div class="card-footer pb-2 pt-2 d-flex flex-row">
+                <form action="/post/delete" method="POST" th:if="${info_usuario != null && info_usuario.perfilAcesso.tipo != null && info_usuario.perfilAcesso.tipo == 'Admin'}">
+                  <input type="text" name="idPost" th:value="${post.idPost}" hidden>
+                  <button type="submit" class="btn btn-danger">Apagar &rarr;</button>
+                </form>
                 <a th:href="@{/post/update(id=${post.idPost})}" class="btn btn-warning" th:if="${info_usuario != null && info_usuario.perfilAcesso.tipo != null && info_usuario.perfilAcesso.tipo == 'Admin'}">Editar &rarr;</a>
                 <a th:href="@{'/post/' + ${post.idPost}}" class="btn btn-primary">Ler &rarr;</a>
               </div>

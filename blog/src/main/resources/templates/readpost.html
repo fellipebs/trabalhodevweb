@@ -35,11 +35,26 @@
                 
 
                 <div class="card mb-5">
-                  <div class="card-body">
-                    <!-- Liked -->
-                    <a href="#"><i class='fas fa-star'></i></a> <th:block th:text="${favoritos}"></th:block>   
-                    <!-- Not liked -->
-                    <!-- <a href="#"><i class='far fa-star'></i></a> -->
+                  <div class="card-body d-flex flex-row">
+
+                    <!-- Not Liked -->
+                    <form action="/favoritos/insert" method="POST" th:if="${!gostado}">
+                        <div th:each="p : ${post}">
+                            <input type="text" name="idPost" th:value="${p.idPost}" hidden>
+                        </div>
+                        <button type="submit" class="ml-3"><i class='far fa-star'></i></button>
+                    </form>
+
+                    <!-- liked -->
+                    <form action="/favoritos/delete" method="POST" th:if="${gostado}">
+                        <div th:each="p : ${post}">
+                            <input type="text" name="idPost" th:value="${p.idPost}" hidden>
+                        </div>
+                        <button type="submit" class="ml-3"><i class='fas fa-star'></i></button>
+                    </form>
+
+                    <!-- Like count -->
+                    <th:block th:text="${favoritos}"></th:block>   
                   </div>
                 </div>
 
