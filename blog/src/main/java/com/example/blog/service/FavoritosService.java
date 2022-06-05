@@ -13,6 +13,7 @@ public interface FavoritosService {
     int getFavoritoByUsuarioAndPost(Integer id_post, Integer id_usuario);
     void deleteAllFavoritos();
     void deleteFavoritosById(Integer id);
+    void deleteFavoritosByPostIdAndUserId(Integer id_post, Integer id_usuario);
     void updateFavoritosById(Integer id, Favoritos favoritos);
     void updateFavoritos(Favoritos favoritos);
     void insertFavoritos(Favoritos favoritos);

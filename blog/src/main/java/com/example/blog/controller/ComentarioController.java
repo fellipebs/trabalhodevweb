@@ -41,13 +41,14 @@ public class ComentarioController {
     }
 
     @RequestMapping(value = "/comentario/insert", method = RequestMethod.POST)
-    public RedirectView submitInsert(@SessionAttribute(name = "usuarioAtual", required = false) Usuario usuarioAtual, @RequestParam("comentario") String comentario, @RequestParam("idPost") Integer idPost) {
-        Post postAtual = postService.getPostById(idPost).get();
-        Comentario novoComentario = new Comentario();  
-        
-        if(usuarioAtual == null){
+    public RedirectView submitInsert(@SessionAttribute(name = "usuarioAtual", required = false) Usuario usuarioAtual,
+            @RequestParam("comentario") String comentario, @RequestParam("idPost") Integer idPost) {
+        if (usuarioAtual == null || usuarioAtual.getNome() == null) {
             return new RedirectView("/login", true);
         }
+
+        Post postAtual = postService.getPostById(idPost).get();
+        Comentario novoComentario = new Comentario();
 
         novoComentario.setComentario(comentario);
         novoComentario.setPost(postAtual);

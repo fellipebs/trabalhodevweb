@@ -52,12 +52,22 @@ public class PostController {
 
         // lista o post
         postService.getPostById(id).ifPresent(val -> mav.addObject("post", val));
+
         // carrega os comentarios do post
         mav.addObject("comentarios", comentarioService.getAllComentarioByPostId(id));
+
         // carrega a quantidade de favoritos do post
-        favoritosService.getCountOfFavoritosByPostId(id)
-                .ifPresent(val -> mav.addObject("favoritos", retornaFavoritoTexto(val)));
+        favoritosService.getCountOfFavoritosByPostId(id).ifPresent(val -> mav.addObject("favoritos", retornaFavoritoTexto(val)));
+
         mav.addObject("info_usuario", usuarioAtual != null && usuarioAtual.getNome() != null ? usuarioAtual : null);
+
+        if(usuarioAtual != null){
+            int count = favoritosService.getFavoritoByUsuarioAndPost(id, usuarioAtual.getIdUsuario());
+            mav.addObject("gostado", count == 0 ? false : true);
+        }
+        else{
+            mav.addObject("gostado", false);
+        }
 
         return mav;
     }
@@ -158,7 +168,7 @@ public class PostController {
 
         postComentarios.forEach(comentario -> comentarioService.deleteComentarioById(comentario.getIdComentario()));
         favoritoComentarios.forEach(favorito -> favoritosService.deleteFavoritosById(favorito.getIdFavoritos()));
-        
+
         postService.deletePostById(post.getIdPost());
 
         return new RedirectView("/", true);
@@ -173,6 +183,9 @@ public class PostController {
                 textoFavoritos = qtde + " favorito";
             } else if (qtde > 1) {
                 textoFavoritos = qtde + " favoritos";
+            }
+            else{
+                textoFavoritos = "Nenhum favoritado por enquanto...";
             }
         }
 

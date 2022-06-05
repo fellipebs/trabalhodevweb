@@ -48,6 +48,11 @@ public class FavoritosServiceImpl implements FavoritosService {
     }
 
     @Override
+    public void deleteFavoritosByPostIdAndUserId(Integer id_post, Integer id_usuario) {
+        favoritosRepository.deleteFavoritosByPostIdAndUserId(id_post, id_usuario);
+    }
+
+    @Override
     public void updateFavoritosById(Integer id, Favoritos favoritos) {
         favoritosRepository.save(favoritos);
     }
