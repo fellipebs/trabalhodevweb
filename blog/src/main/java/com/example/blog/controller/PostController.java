@@ -1,10 +1,13 @@
 package com.example.blog.controller;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 import javax.validation.Valid;
 
+import com.example.blog.model.Comentario;
+import com.example.blog.model.Favoritos;
 import com.example.blog.model.Post;
 import com.example.blog.model.Usuario;
 import com.example.blog.service.CategoriaService;
@@ -106,7 +109,8 @@ public class PostController {
     }
 
     @RequestMapping(value = "/post/update", method = RequestMethod.POST)
-    public RedirectView submitUpdate(Integer id, @Valid @ModelAttribute("post") Post post, BindingResult result, ModelMap model) {
+    public RedirectView submitUpdate(Integer id, @Valid @ModelAttribute("post") Post post, BindingResult result,
+            ModelMap model) {
         if (result.hasErrors()) {
             return new RedirectView("/post/update?id=" + id);
         }
@@ -115,26 +119,27 @@ public class PostController {
 
         post.setIdPost(id);
         post.setFoto(postAntigo.getFoto());
-        post.setUsuario(postAntigo.getUsuario());    
+        post.setUsuario(postAntigo.getUsuario());
 
         postService.updatePost(post);
         return new RedirectView("/post/update?id=" + id);
     }
 
     @RequestMapping(value = "/post/foto/update", method = RequestMethod.POST)
-    public RedirectView updatePostPhoto(Integer id, @RequestParam("imageFile") MultipartFile imageFile) throws IOException {
+    public RedirectView updatePostPhoto(Integer id, @RequestParam("imageFile") MultipartFile imageFile)
+            throws IOException {
 
         String fileName = imageFile.getOriginalFilename();
         String extension = fileName.substring(fileName.lastIndexOf(".") + 1);
         String newFileName = UUID.randomUUID() + "." + extension;
 
-        Post postAntigo = postService.getPostById(id).get(); 
+        Post postAntigo = postService.getPostById(id).get();
         postAntigo.setFoto(newFileName);
 
         postService.updatePost(postAntigo);
 
         String uploadDir = "post-fotos/";
-        
+
         FileUploadUtil.saveFile(uploadDir, newFileName, imageFile);
 
         return new RedirectView("/post/update?id=" + id);
@@ -146,12 +151,17 @@ public class PostController {
     }
 
     @RequestMapping(value = "/post/delete", method = RequestMethod.POST)
-    public String submitDelete(@Valid @ModelAttribute("post") Post post, BindingResult result, ModelMap model) {
-        if (result.hasErrors()) {
-            return "error";
-        }
+    public RedirectView submitDelete(@Valid @ModelAttribute("post") Post post) {
+
+        List<Comentario> postComentarios = comentarioService.getAllComentarioByPostId(post.getIdPost());
+        List<Favoritos> favoritoComentarios = favoritosService.getAllFavoritosByPostId(post.getIdPost());
+
+        postComentarios.forEach(comentario -> comentarioService.deleteComentarioById(comentario.getIdComentario()));
+        favoritoComentarios.forEach(favorito -> favoritosService.deleteFavoritosById(favorito.getIdFavoritos()));
+        
         postService.deletePostById(post.getIdPost());
-        return "redirect:";
+
+        return new RedirectView("/", true);
 
     }
 
