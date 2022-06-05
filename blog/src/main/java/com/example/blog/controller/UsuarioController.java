@@ -83,7 +83,7 @@ public class UsuarioController {
         usuarioAtual.setFoto(usuario.getFoto());
         usuarioAtual.setSenha(usuario.getSenha());
 
-        return new RedirectView("/", true);
+        return new RedirectView("/editarperfil", true);
     }
 
     @RequestMapping(value = "/usuario/delete", method = RequestMethod.GET)
